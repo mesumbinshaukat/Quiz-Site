@@ -176,14 +176,14 @@
                         <a href="#account_menu" class="nav-link dropdown-toggle" data-toggle="dropdown"
                             data-caret="false">
                             <span class="mr-1 d-flex-inline">
-                                <span class="text-light">Adrian D.</span>
+                                <span class="text-light">Admin</span>
                             </span>
                             <img src="assets/images/avatar/demi.png" class="rounded-circle" width="32" alt="Frontted">
                         </a>
                         <div id="account_menu" class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-item-text dropdown-item-text--lh">
-                                <div><strong>Adrian Demian</strong></div>
-                                <div class="text-muted">@adriandemian</div>
+                                <div><strong>Admin</strong></div>
+
                             </div>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item active" href="index.html"><i class="material-icons">dvr</i>

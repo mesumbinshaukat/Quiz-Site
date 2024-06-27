@@ -250,9 +250,9 @@
                       </a>
                   </li>
                   <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-alerts.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">notifications</i>
-                          <span class="sidebar-menu-text">Alerts</span>
+                      <a class="sidebar-menu-button" href="add-student.php">
+                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">group_add</i>
+                          <span class="sidebar-menu-text">Add Student</span>
                       </a>
                   </li>
                   <li class="sidebar-menu-item">
@@ -356,8 +356,8 @@
                       <img src="assets/images/avatar/demi.png" alt="avatar" class="avatar-img rounded-circle">
                   </span>
                   <span class="flex d-flex flex-column">
-                      <strong>Adrian Demian</strong>
-                      <small class="text-muted text-uppercase">Site Manager</small>
+                      <strong>Admin</strong>
+
                   </span>
               </a>
               <div class="dropdown ml-auto">
@@ -365,23 +365,19 @@
                           class="material-icons">more_vert</i></a>
                   <div class="dropdown-menu dropdown-menu-right">
                       <div class="dropdown-item-text dropdown-item-text--lh">
-                          <div><strong>Adrian Demian</strong></div>
-                          <div>@adriandemian</div>
+                          <div><strong>Admin</strong></div>
+
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item active" href="index.html">Dashboard</a>
+                          <a class="dropdown-item" href="profile.html">My profile</a>
+                          <a class="dropdown-item" href="edit-account.html">Edit account</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="login.html">Logout</a>
                       </div>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item active" href="index.html">Dashboard</a>
-                      <a class="dropdown-item" href="profile.html">My profile</a>
-                      <a class="dropdown-item" href="edit-account.html">Edit account</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="login.html">Logout</a>
                   </div>
               </div>
-          </div>
 
-          <div class="sidebar-p-a">
-              <a href="https://themeforest.net/item/stack-admin-bootstrap-4-dashboard-template/22959011"
-                  class="btn btn-primary btn-block">Purchase &dollar;35</a>
-          </div>
 
+
+          </div>
       </div>
-  </div>
