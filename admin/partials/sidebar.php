@@ -256,10 +256,10 @@
                       </a>
                   </li>
                   <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-avatars.html">
+                      <a class="sidebar-menu-button" href="parents.php">
                           <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person</i>
-                          <span class="sidebar-menu-text">Avatars</span>
-                          <span class="badge badge-primary ml-auto">NEW</span>
+                          <span class="sidebar-menu-text">Add Parents</span>
+
                       </a>
                   </li>
                   <li class="sidebar-menu-item">
@@ -344,7 +344,8 @@
                       <div class="font-weight-bold text-success">60%</div>
                   </div>
                   <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60"
+                          aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
               </div>
           </div>
@@ -360,7 +361,8 @@
                   </span>
               </a>
               <div class="dropdown ml-auto">
-                  <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i class="material-icons">more_vert</i></a>
+                  <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i
+                          class="material-icons">more_vert</i></a>
                   <div class="dropdown-menu dropdown-menu-right">
                       <div class="dropdown-item-text dropdown-item-text--lh">
                           <div><strong>Adrian Demian</strong></div>
@@ -377,7 +379,8 @@
           </div>
 
           <div class="sidebar-p-a">
-              <a href="https://themeforest.net/item/stack-admin-bootstrap-4-dashboard-template/22959011" class="btn btn-primary btn-block">Purchase &dollar;35</a>
+              <a href="https://themeforest.net/item/stack-admin-bootstrap-4-dashboard-template/22959011"
+                  class="btn btn-primary btn-block">Purchase &dollar;35</a>
           </div>
 
       </div>
