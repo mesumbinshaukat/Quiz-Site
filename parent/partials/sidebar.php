@@ -245,18 +245,7 @@
         <div class="sidebar-heading">Components</div>
         <div class="sidebar-block p-0 mb-0">
             <ul class="sidebar-menu" id="components_menu">
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-buttons.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">mouse</i>
-                        <span class="sidebar-menu-text">Buttons</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-alerts.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">notifications</i>
-                        <span class="sidebar-menu-text">Alerts</span>
-                    </a>
-                </li>
+
                 <li class="sidebar-menu-item">
                     <a class="sidebar-menu-button" href="parents.php">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person</i>
@@ -270,13 +259,7 @@
                         <span class="sidebar-menu-text">Class</span>
                     </a>
                 </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-charts.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">pie_chart_outlined</i>
-                        <span class="sidebar-menu-text">Charts</span>
-                        <span class="badge badge-warning ml-auto">PRO</span>
-                    </a>
-                </li>
+
                 <li class="sidebar-menu-item">
                     <a class="sidebar-menu-button" href="add-quiz.php">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">brush</i>
@@ -289,55 +272,7 @@
                         <span class="sidebar-menu-text">Forms</span>
                     </a>
                 </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-range-sliders.html">
-                        <!-- tune or low_priority or linear_scale or space_bar or swap_calls -->
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">tune</i>
-                        <span class="sidebar-menu-text">Range Sliders</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-datetime.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">event_available</i>
-                        <span class="sidebar-menu-text">Time &amp; Date</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-tables.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dns</i>
-                        <span class="sidebar-menu-text">Tables</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-tabs.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">tab</i>
-                        <span class="sidebar-menu-text">Tabs</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-loaders.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">refresh</i>
-                        <span class="sidebar-menu-text">Loaders</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-drag.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">control_point</i>
-                        <span class="sidebar-menu-text">Drag &amp; Drop</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-pagination.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">last_page</i>
-                        <span class="sidebar-menu-text">Pagination</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-vector-maps.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">location_on</i>
-                        <span class="sidebar-menu-text">Vector Maps</span>
-                    </a>
-                </li>
+
             </ul>
 
             <div class="sidebar-p-a sidebar-b-y">
