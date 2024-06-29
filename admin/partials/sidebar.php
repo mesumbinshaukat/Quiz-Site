@@ -244,9 +244,9 @@
           <div class="sidebar-block p-0 mb-0">
               <ul class="sidebar-menu" id="components_menu">
                   <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-buttons.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">mouse</i>
-                          <span class="sidebar-menu-text">Buttons</span>
+                      <a class="sidebar-menu-button" href="add-subjects.php">
+                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">book</i>
+                          <span class="sidebar-menu-text">Add Subject</span>
                       </a>
                   </li>
                   <li class="sidebar-menu-item">
@@ -265,7 +265,7 @@
                   <li class="sidebar-menu-item">
                       <a class="sidebar-menu-button" href="class.php">
                           <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">aspect_ratio</i>
-                          <span class="sidebar-menu-text">Class</span>
+                          <span class="sidebar-menu-text">Add Class</span>
                       </a>
                   </li>
                   <li class="sidebar-menu-item">
@@ -277,7 +277,7 @@
                   </li>
                   <li class="sidebar-menu-item">
                       <a class="sidebar-menu-button" href="add-quiz.php">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">brush</i>
+                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">edit</i>
                           <span class="sidebar-menu-text">Add Quiz</span>
                       </a>
                   </li>
@@ -344,8 +344,7 @@
                       <div class="font-weight-bold text-success">60%</div>
                   </div>
                   <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60"
-                          aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
               </div>
           </div>
@@ -361,8 +360,7 @@
                   </span>
               </a>
               <div class="dropdown ml-auto">
-                  <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i
-                          class="material-icons">more_vert</i></a>
+                  <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i class="material-icons">more_vert</i></a>
                   <div class="dropdown-menu dropdown-menu-right">
                       <div class="dropdown-item-text dropdown-item-text--lh">
                           <div><strong>Admin</strong></div>
