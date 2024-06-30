@@ -10,22 +10,38 @@ if (!isset($_COOKIE["email"]) && !isset($_COOKIE["login"])) {
 
 if (isset($_POST["submit"])) {
 
+    $parent_id = $_POST["parent"];
     $name = $_POST["name"];
-    $email = $_POST["email"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $gender = $_POST["gender"];
+    $dob = $_POST["age"];
+    $class = $_POST["class"];
 
-    $sql = "INSERT INTO `db_parents`(`name`, `email`, `password`, `gender`) VALUES ('$name', '$email', '$password', '$gender')";
-    $result = mysqli_query($conn, $sql);
+    $sql = "INSERT INTO `db_students` (`parent_id`, `name`, `gender`, `age`, `class_id`) VALUES ('$parent_id', '$name', '$gender', '$dob', '$class')";
+    $query_run = mysqli_query($conn, $sql);
 
-    if ($result) {
-        $_SESSION["success"] = "Parent added successfully!";
-        header("Location: ./parents.php");
+    if ($query_run) {
+        $_SESSION["success"] = "Student added successfully";
+        header("Location: ./add-student.php");
         exit();
     } else {
-        $_SESSION["error"] = "Something went wrong!";
+        $_SESSION["error"] = "Something went wrong. Please Try Again";
+        header("Location: ./add-student.php");
+        exit();
     }
 }
+
+$parent_email = $_COOKIE["email"];
+
+$parent_query = "SELECT * FROM `db_parents` WHERE `email` = '$parent_email'";
+
+$query_run = mysqli_query($conn, $parent_query);
+
+$fetch_parent = mysqli_fetch_assoc($query_run);
+
+$parent_id = $fetch_parent["id"];
+
+$class_query = "SELECT * FROM `db_class`";
+$query_run_class = mysqli_query($conn, $class_query);
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +51,7 @@ if (isset($_POST["submit"])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Add Parents</title>
+    <title>Add Child</title>
 
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">
@@ -58,13 +74,13 @@ if (isset($_POST["submit"])) {
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-133433427-1');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-133433427-1');
     </script>
 
     <!-- Flatpickr -->
@@ -86,7 +102,8 @@ if (isset($_POST["submit"])) {
     <link type="text/css" href="assets/css/vendor-select2.rtl.css" rel="stylesheet">
     <link type="text/css" href="assets/vendor/select2/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
@@ -114,7 +131,7 @@ if (isset($_POST["submit"])) {
                         <div class="page__heading">
 
 
-                            <h1 class="m-0">Add Parents</h1>
+                            <h1 class="m-0">Add Child</h1>
                         </div>
                     </div>
 
@@ -126,36 +143,46 @@ if (isset($_POST["submit"])) {
                                 <div class="col-lg-12 card-form__body card-body">
 
                                     <?php if (isset($_SESSION["success"])) { ?>
-                                        <div class="alert alert-success" role="alert">
-                                            <?php echo $_SESSION["success"]; ?>
-                                        </div>
+                                    <div class="alert alert-success" role="alert">
+                                        <?php echo $_SESSION["success"]; ?>
+                                    </div>
                                     <?php }
                                     if (isset($_SESSION["error"])) { ?>
-                                        <div class="alert alert-danger" role="alert">
-                                            <?php echo $_SESSION["error"]; ?>
-                                        </div>
+                                    <div class="alert alert-danger" role="alert">
+                                        <?php echo $_SESSION["error"]; ?>
+                                    </div>
                                     <?php }
                                     session_unset();
                                     ?>
 
                                     <form method="post">
+                                        <input type="hidden" name="parent" value="<?= $parent_id ?>">
                                         <div class="form-group">
-                                            <label for="class">Parent Name:</label>
-                                            <input type="text" name="name" class="form-control" id="parent" placeholder="Enter Parent Name ..">
+                                            <label for="class">Child Name:</label>
+                                            <input type="text" class="form-control" name="name"
+                                                placeholder="Enter Child Name">
                                         </div>
                                         <div class="form-group">
-                                            <label for="email">Parent Email:</label>
-                                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter Parent Email ..">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Password:</label>
-                                            <input type="password" name="password" class="form-control" id="password" placeholder="Enter Parent Password ..">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="gender">Gender:</label>
-                                            <select name="gender" id="gender" class="form-control">
+                                            <label for="class">Gender:</label>
+                                            <select name="gender" class="form-control">
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="class">Age:</label>
+                                            <input type="number" class="form-control" name="age"
+                                                placeholder="Enter Child Age">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="class">Class:</label>
+                                            <select name="class" class="form-control">
+
+                                                <?php while ($row = mysqli_fetch_assoc($query_run_class)) { ?>
+                                                <option value="<?= $row["id"] ?>"><?= $row["class"] ?></option>
+
+                                                <?php } ?>
+
                                             </select>
                                         </div>
 
@@ -237,7 +264,5 @@ if (isset($_POST["submit"])) {
 
 
 </body>
-
-</html>
 
 </html>

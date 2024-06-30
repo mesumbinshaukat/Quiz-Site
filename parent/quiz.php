@@ -1,3 +1,36 @@
+<?php
+session_start();
+
+include("./connection/connection.php");
+
+// Check if user is logged in
+if (!isset($_COOKIE["login"]) && !isset($_COOKIE["name"])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Fetch quizzes from database
+$quizzes_query = "SELECT * FROM `db_quiz`";
+$quizzes_result = mysqli_query($conn, $quizzes_query);
+
+// Check if there are no quizzes
+if (!$quizzes_result || mysqli_num_rows($quizzes_result) == 0) {
+    $quizzes = [];
+} else {
+    $quizzes = mysqli_fetch_all($quizzes_result, MYSQLI_ASSOC);
+}
+
+$parent_email = $_COOKIE['email'];
+
+$parent_query = "SELECT `id` FROM `db_parents` WHERE `email` = '$parent_email'";
+$parent_result = mysqli_query($conn, $parent_query);
+$parent_row = mysqli_fetch_assoc($parent_result);
+$parent_id = $parent_row['id'];
+
+$student_query = "SELECT * FROM `db_students` WHERE `parent_id` = $parent_id";
+$student_result = mysqli_query($conn, $student_query);
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -5,7 +38,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Forms</title>
+    <title>Quizzes</title>
 
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">
@@ -36,26 +69,6 @@
         gtag('js', new Date());
         gtag('config', 'UA-133433427-1');
     </script>
-
-    <!-- Flatpickr -->
-    <link type="text/css" href="assets/css/vendor-flatpickr.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/vendor-flatpickr.rtl.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/vendor-flatpickr-airbnb.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/vendor-flatpickr-airbnb.rtl.css" rel="stylesheet">
-
-    <!-- Quill Theme -->
-    <link type="text/css" href="assets/css/vendor-quill.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/vendor-quill.rtl.css" rel="stylesheet">
-
-    <!-- Dropzone -->
-    <link type="text/css" href="assets/css/vendor-dropzone.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/vendor-dropzone.rtl.css" rel="stylesheet">
-
-    <!-- Select2 -->
-    <link type="text/css" href="assets/css/vendor-select2.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/vendor-select2.rtl.css" rel="stylesheet">
-    <link type="text/css" href="assets/vendor/select2/select2.min.css" rel="stylesheet">
-
 </head>
 
 <body class="layout-default">
@@ -66,9 +79,7 @@
     <div class="mdk-header-layout js-mdk-header-layout">
 
         <!-- Header -->
-
         <?php include("./partials/header.php"); ?>
-
         <!-- // END Header -->
 
         <!-- Header Layout Content -->
@@ -79,30 +90,43 @@
 
                     <div class="container-fluid page__heading-container">
                         <div class="page__heading">
-
-
-                            <h1 class="m-0">Add Quiz</h1>
+                            <h1 class="m-0">Quizzes</h1>
                         </div>
                     </div>
 
                     <div class="container-fluid page__container">
+                        <?php if (isset($_SESSION["success"])) { ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo $_SESSION["success"]; ?>
+                            </div>
+                        <?php }
+                        if (isset($_SESSION["error"])) { ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo $_SESSION["error"]; ?>
+                            </div>
+                        <?php }
+                        session_unset();
+                        ?>
+                        <div class="card">
+                            <div class="card-body">
 
-                        <div class="card card-form">
-                            <div class="row no-gutters">
+                                <form id="quizForm" method="POST" action="quiz_start.php">
+                                    <label for="student">Select Your Children:</label>
+                                    <select name="student" id="student" required>
+                                        <option value="">Select a student</option>
+                                        <?php while ($student = mysqli_fetch_assoc($student_result)) : ?>
+                                            <option value="<?php echo $student['id']; ?>">
+                                                <?php echo $student['name']; ?>
+                                            </option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                    <input type="hidden" name="quiz_id" id="quiz_id">
+                                </form>
 
-                                <div class="col-lg-12 card-form__body card-body">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Your email:</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email address ..">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Your password:</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your password ..">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+                                <div id="quizList">
+                                    <p>Please select a student to view available quizzes.</p>
                                 </div>
+
                             </div>
                         </div>
 
@@ -112,7 +136,7 @@
                 <!-- // END drawer-layout__content -->
 
                 <div class="mdk-drawer  js-mdk-drawer" id="default-drawer" data-align="start">
-                    <?php include("./partials/sidebar.php") ?>
+                    <?php include("./partials/sidebar.php"); ?>
                 </div>
             </div>
             <!-- // END drawer-layout -->
@@ -159,24 +183,35 @@
     <!-- App Settings (safe to remove) -->
     <script src="assets/js/app-settings.js"></script>
 
-    <!-- Flatpickr -->
-    <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
-    <script src="assets/js/flatpickr.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#student').change(function() {
+                var studentId = $(this).val();
+                if (studentId) {
+                    $.ajax({
+                        url: 'fetch_quizzes.php',
+                        type: 'POST',
+                        data: {
+                            student_id: studentId
+                        },
+                        success: function(response) {
+                            $('#quizList').html(response);
+                        },
+                        error: function() {
+                            alert('Error fetching quizzes.');
+                        }
+                    });
+                } else {
+                    $('#quizList').html('<p>Please select a student to view available quizzes.</p>');
+                }
+            });
+        });
 
-    <!-- jQuery Mask Plugin -->
-    <script src="assets/vendor/jquery.mask.min.js"></script>
-
-    <!-- Quill -->
-    <script src="assets/vendor/quill.min.js"></script>
-    <script src="assets/js/quill.js"></script>
-
-    <!-- Dropzone -->
-    <script src="assets/vendor/dropzone.min.js"></script>
-    <script src="assets/js/dropzone.js"></script>
-
-    <!-- Select2 -->
-    <script src="assets/vendor/select2/select2.min.js"></script>
-    <script src="assets/js/select2.js"></script>
+        function startQuiz(quizId) {
+            document.getElementById('quiz_id').value = quizId;
+            document.getElementById('quizForm').submit();
+        }
+    </script>
 
 </body>
 

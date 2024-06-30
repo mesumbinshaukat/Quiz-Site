@@ -13,13 +13,18 @@ if (isset($_POST["submit"])) {
     $quiz_name = $_POST["quiz"];
     $subject_id = $_POST["subject"];
     $questions = $_POST["questions"];
-    $total_marks = $_POST["total_marks"];
+    $total_marks = count($questions);
 
     $quiz_data = [];
     foreach ($questions as $question) {
+        // Explode options string into an array
+        $options = explode(',', $question['options']);
+        // Trim each option to remove extra spaces
+        $options = array_map('trim', $options);
+
         $quiz_data[] = [
             'question' => $question['question'],
-            'options' => $question['options'],
+            'options' => $options,
             'correct_answer' => $question['correct_answer']
         ];
     }
@@ -74,13 +79,13 @@ $query_run_subject = mysqli_query($conn, $subject_query);
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-133433427-1');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-133433427-1');
     </script>
 
     <!-- Flatpickr -->
@@ -102,7 +107,8 @@ $query_run_subject = mysqli_query($conn, $subject_query);
     <link type="text/css" href="assets/css/vendor-select2.rtl.css" rel="stylesheet">
     <link type="text/css" href="assets/vendor/select2/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
@@ -142,14 +148,14 @@ $query_run_subject = mysqli_query($conn, $subject_query);
                                 <div class="col-lg-12 card-form__body card-body">
 
                                     <?php if (isset($_SESSION["success"])) { ?>
-                                        <div class="alert alert-success" role="alert">
-                                            <?php echo $_SESSION["success"]; ?>
-                                        </div>
+                                    <div class="alert alert-success" role="alert">
+                                        <?php echo $_SESSION["success"]; ?>
+                                    </div>
                                     <?php }
                                     if (isset($_SESSION["error"])) { ?>
-                                        <div class="alert alert-danger" role="alert">
-                                            <?php echo $_SESSION["error"]; ?>
-                                        </div>
+                                    <div class="alert alert-danger" role="alert">
+                                        <?php echo $_SESSION["error"]; ?>
+                                    </div>
                                     <?php }
                                     session_unset();
                                     ?>
@@ -157,7 +163,8 @@ $query_run_subject = mysqli_query($conn, $subject_query);
                                     <form method="post">
                                         <div class="form-group">
                                             <label for="quiz">Quiz Name:</label>
-                                            <input type="text" class="form-control" name="quiz" id="quiz" placeholder="Enter Quiz Name">
+                                            <input type="text" class="form-control" name="quiz" id="quiz"
+                                                placeholder="Enter Quiz Name">
                                         </div>
 
                                         <div class="form-group">
@@ -168,8 +175,8 @@ $query_run_subject = mysqli_query($conn, $subject_query);
                                                     $query_run_class = mysqli_query($conn, $class_query);
                                                     $class = mysqli_fetch_assoc($query_run_class);
                                                 ?>
-                                                    <option value="<?= $row["id"] ?>"><?= $row["subject"] ?> |
-                                                        <?= $class["class"] ?></option>
+                                                <option value="<?= $row["id"] ?>"><?= $row["subject"] ?> |
+                                                    <?= $class["class"] ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -177,22 +184,26 @@ $query_run_subject = mysqli_query($conn, $subject_query);
                                         <div id="questions-container">
                                             <div class="form-group">
                                                 <label for="question-0">Question:</label>
-                                                <input type="text" class="form-control" name="questions[0][question]" id="question-0" placeholder="Enter Question">
+                                                <input type="text" class="form-control" name="questions[0][question]"
+                                                    id="question-0" placeholder="Enter Question">
                                             </div>
                                             <div class="form-group">
                                                 <label for="options-0">Options (comma-separated):</label>
-                                                <input type="text" class="form-control" name="questions[0][options]" id="options-0" placeholder="Enter Options">
+                                                <input type="text" class="form-control" name="questions[0][options]"
+                                                    id="options-0" placeholder="Enter Options">
                                             </div>
                                             <div class="form-group">
                                                 <label for="correct-answer-0">Correct Answer:</label>
-                                                <input type="text" class="form-control" name="questions[0][correct_answer]" id="correct-answer-0" placeholder="Enter Correct Answer">
+                                                <input type="text" class="form-control"
+                                                    name="questions[0][correct_answer]" id="correct-answer-0"
+                                                    placeholder="Enter Correct Answer">
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label for="total-marks">Total Marks:</label>
                                             <input type="number" class="form-control" name="total_marks" id="total-marks" placeholder="Enter Total Marks">
-                                        </div>
+                                        </div> -->
                                         <button type="button" class="btn btn-secondary" id="add-question">Add Another
                                             Question</button>
 
@@ -230,9 +241,9 @@ $query_run_subject = mysqli_query($conn, $subject_query);
     </div>
 
     <script>
-        document.getElementById('add-question').addEventListener('click', function() {
-            var questionCount = document.querySelectorAll('#questions-container .form-group').length / 3;
-            var newQuestion = `
+    document.getElementById('add-question').addEventListener('click', function() {
+        var questionCount = document.querySelectorAll('#questions-container .form-group').length / 3;
+        var newQuestion = `
                 <div class="form-group">
                     <label for="question-${questionCount}">Question:</label>
                     <input type="text" class="form-control" name="questions[${questionCount}][question]" id="question-${questionCount}" placeholder="Enter Question">
@@ -245,8 +256,8 @@ $query_run_subject = mysqli_query($conn, $subject_query);
                     <label for="correct-answer-${questionCount}">Correct Answer:</label>
                     <input type="text" class="form-control" name="questions[${questionCount}][correct_answer]" id="correct-answer-${questionCount}" placeholder="Enter Correct Answer">
                 </div>`;
-            document.getElementById('questions-container').insertAdjacentHTML('beforeend', newQuestion);
-        });
+        document.getElementById('questions-container').insertAdjacentHTML('beforeend', newQuestion);
+    });
     </script>
 
     <!-- jQuery -->

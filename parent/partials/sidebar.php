@@ -247,78 +247,53 @@
             <ul class="sidebar-menu" id="components_menu">
 
                 <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="parents.php">
+                    <a class="sidebar-menu-button" href="add-student.php">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person</i>
-                        <span class="sidebar-menu-text">Add Parents</span>
+                        <span class="sidebar-menu-text">Add Child</span>
 
-                    </a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="class.php">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">aspect_ratio</i>
-                        <span class="sidebar-menu-text">Class</span>
                     </a>
                 </li>
 
                 <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="add-quiz.php">
+                    <a class="sidebar-menu-button" href="quiz.php">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">brush</i>
-                        <span class="sidebar-menu-text">Add Quiz</span>
+                        <span class="sidebar-menu-text">Quiz</span>
                     </a>
                 </li>
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="ui-forms.html">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">text_format</i>
-                        <span class="sidebar-menu-text">Forms</span>
-                    </a>
-                </li>
+
 
             </ul>
 
-            <div class="sidebar-p-a sidebar-b-y">
-                <div class="d-flex align-items-top mb-2">
-                    <div class="sidebar-heading m-0 p-0 flex text-body js-text-body">Progress</div>
-                    <div class="font-weight-bold text-success">60%</div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
+
         </div>
 
         <div class="d-flex align-items-center sidebar-p-a border-bottom sidebar-account">
-            <a href="profile.html" class="flex d-flex align-items-center text-underline-0 text-body">
+            <a href="#" class="flex d-flex align-items-center text-underline-0 text-body">
                 <span class="avatar avatar-sm mr-2">
-                    <img src="assets/images/avatar/demi.png" alt="avatar" class="avatar-img rounded-circle">
+                    <img src="assets/images/avatar/family.png" alt="avatar" class="avatar-img rounded-circle">
                 </span>
                 <span class="flex d-flex flex-column">
                     <strong><?php echo $name; ?></strong>
-                    <small class="text-muted text-uppercase">Site Manager</small>
+
                 </span>
             </a>
             <div class="dropdown ml-auto">
-                <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i
-                        class="material-icons">more_vert</i></a>
+                <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i class="material-icons">more_vert</i></a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-item-text dropdown-item-text--lh">
                         <div><strong><?php echo $name; ?></strong></div>
 
                     </div>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item active" href="index.html">Dashboard</a>
-                    <a class="dropdown-item" href="profile.html">My profile</a>
-                    <a class="dropdown-item" href="edit-account.html">Edit account</a>
+                    <a class="dropdown-item active" href="index.php">Dashboard</a>
+                    <!-- <a class="dropdown-item" href="profile.html">My profile</a> -->
+                    <!-- <a class="dropdown-item" href="edit-account.html">Edit account</a> -->
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="./partials/logout.php">Logout</a>
                 </div>
             </div>
         </div>
 
-        <div class="sidebar-p-a">
-            <a href="https://themeforest.net/item/stack-admin-bootstrap-4-dashboard-template/22959011"
-                class="btn btn-primary btn-block">Purchase &dollar;35</a>
-        </div>
 
     </div>
 </div>

@@ -268,89 +268,18 @@
                           <span class="sidebar-menu-text">Add Class</span>
                       </a>
                   </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-charts.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">pie_chart_outlined</i>
-                          <span class="sidebar-menu-text">Charts</span>
-                          <span class="badge badge-warning ml-auto">PRO</span>
-                      </a>
-                  </li>
+
                   <li class="sidebar-menu-item">
                       <a class="sidebar-menu-button" href="add-quiz.php">
                           <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">edit</i>
                           <span class="sidebar-menu-text">Add Quiz</span>
                       </a>
                   </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-forms.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">text_format</i>
-                          <span class="sidebar-menu-text">Forms</span>
-                      </a>
-                  </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-range-sliders.html">
-                          <!-- tune or low_priority or linear_scale or space_bar or swap_calls -->
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">tune</i>
-                          <span class="sidebar-menu-text">Range Sliders</span>
-                      </a>
-                  </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-datetime.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">event_available</i>
-                          <span class="sidebar-menu-text">Time &amp; Date</span>
-                      </a>
-                  </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-tables.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dns</i>
-                          <span class="sidebar-menu-text">Tables</span>
-                      </a>
-                  </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-tabs.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">tab</i>
-                          <span class="sidebar-menu-text">Tabs</span>
-                      </a>
-                  </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-loaders.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">refresh</i>
-                          <span class="sidebar-menu-text">Loaders</span>
-                      </a>
-                  </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-drag.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">control_point</i>
-                          <span class="sidebar-menu-text">Drag &amp; Drop</span>
-                      </a>
-                  </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-pagination.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">last_page</i>
-                          <span class="sidebar-menu-text">Pagination</span>
-                      </a>
-                  </li>
-                  <li class="sidebar-menu-item">
-                      <a class="sidebar-menu-button" href="ui-vector-maps.html">
-                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">location_on</i>
-                          <span class="sidebar-menu-text">Vector Maps</span>
-                      </a>
-                  </li>
-              </ul>
 
-              <div class="sidebar-p-a sidebar-b-y">
-                  <div class="d-flex align-items-top mb-2">
-                      <div class="sidebar-heading m-0 p-0 flex text-body js-text-body">Progress</div>
-                      <div class="font-weight-bold text-success">60%</div>
-                  </div>
-                  <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-              </div>
           </div>
 
           <div class="d-flex align-items-center sidebar-p-a border-bottom sidebar-account">
-              <a href="profile.html" class="flex d-flex align-items-center text-underline-0 text-body">
+              <a href="#" class="flex d-flex align-items-center text-underline-0 text-body">
                   <span class="avatar avatar-sm mr-2">
                       <img src="assets/images/avatar/demi.png" alt="avatar" class="avatar-img rounded-circle">
                   </span>
@@ -366,9 +295,9 @@
                           <div><strong>Admin</strong></div>
 
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item active" href="index.html">Dashboard</a>
-                          <a class="dropdown-item" href="profile.html">My profile</a>
-                          <a class="dropdown-item" href="edit-account.html">Edit account</a>
+                          <a class="dropdown-item active" href="index.php">Dashboard</a>
+                          <!-- <a class="dropdown-item" href="profile.html">My profile</a>
+                          <a class="dropdown-item" href="edit-account.html">Edit account</a> -->
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="login.html">Logout</a>
                       </div>

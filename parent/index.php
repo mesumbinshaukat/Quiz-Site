@@ -3,8 +3,8 @@ session_start();
 
 include("./connection/connection.php");
 
-if (!isset($_COOKIE["email"]) && !isset($_COOKIE["login"])) {
-    header("Location: ./verify-access/admin_login.php");
+if (!isset($_COOKIE["login"]) && !isset($_COOKIE["name"])) {
+    header("Location: login.php");
     exit();
 }
 ?>

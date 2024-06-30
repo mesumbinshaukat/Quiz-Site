@@ -23,6 +23,7 @@ if (isset($_POST["login"])) {
             $login_bool = true;
             setcookie("name", $row["name"], time() + (86400 * 30), "/");
             setcookie("login", $login_bool, time() + (86400 * 30), "/");
+            setcookie("email", $email, time() + (86400 * 30), "/");
             $_SESSION["login_success"] = "Login Successfull";
             header("Location: index.php");
             exit();
@@ -67,17 +68,16 @@ if (isset($_POST["login"])) {
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-133433427-1');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-133433427-1');
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
@@ -99,8 +99,7 @@ if (isset($_POST["login"])) {
             <div class="form-group">
                 <label class="text-label" for="email">Email Address:</label>
                 <div class="input-group input-group-merge">
-                    <input id="email" type="email" required name="email" class="form-control form-control-prepended"
-                        placeholder="Your Registered Email...">
+                    <input id="email" type="email" required name="email" class="form-control form-control-prepended" placeholder="Your Registered Email...">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-envelope"></span>
@@ -111,8 +110,7 @@ if (isset($_POST["login"])) {
             <div class="form-group">
                 <label class="text-label" for="password">Password:</label>
                 <div class="input-group input-group-merge">
-                    <input id="password" type="password" name="password" required=""
-                        class="form-control form-control-prepended" placeholder="Password...">
+                    <input id="password" type="password" name="password" required="" class="form-control form-control-prepended" placeholder="Password...">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fa fa-key"></span>
