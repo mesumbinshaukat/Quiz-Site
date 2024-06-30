@@ -9,44 +9,32 @@ if (!isset($_COOKIE["email"]) && !isset($_COOKIE["login"])) {
 }
 
 if (isset($_POST["submit"])) {
-
-    $image = $_FILES["image"]["name"];
+    echo "<script>alert('hi')</script>";
+    $image_name = $_FILES["image"]["name"];
     $image_tmp = $_FILES["image"]["tmp_name"];
 
-    $old_image = $_POST["old_image"];
+    if ($image_name != "") {
+        $location = "../logo/";
+        move_uploaded_file($image_tmp, $location . $image_name);
 
-    if ($image == "" || $image == null) {
-        $update_query = "UPDATE `db_home` SET `image` = '$old_image' WHERE `id` = 1";
-        mysqli_query($conn, $update_query);
-        move_uploaded_file($image_tmp, "../assets/img/home_5/about/" . $old_image);
+        $sql = "UPDATE `db_logo` SET `logo` = '$image_name' WHERE `id` = 1";
+
+        if ($conn->query($sql) === TRUE) {
+            $_SESSION["success"] = "Logo uploaded successfully";
+            header("Location: ./change-logo.php");
+            exit();
+        } else {
+            $_SESSION["error"] = "Something went wrong. Please Try Again";
+            header("Location: ./change-logo.php");
+            exit();
+        }
     } else {
-        $update_query = "UPDATE `db_home` SET `image` = '$image' WHERE `id` = 1";
-        mysqli_query($conn, $update_query);
-        move_uploaded_file($image_tmp, "../assets/img/home_5/about/" . $image);
-    }
+        $_SESSION["error"] = "Please select an image";
 
-    $subtitle = $_POST["subtitle"];
-    $title = $_POST["title"];
-    $paragraph = $_POST["paragraph"];
-    $experience = $_POST["experience"];
-
-    $update_query = "UPDATE `db_home` SET `subtitle` = '$subtitle', `headline_title` = '$title', `paragraph` = '$paragraph', `experience` = '$experience' WHERE `id` = 1";
-
-    if (mysqli_query($conn, $update_query)) {
-        $_SESSION["success"] = "Home updated successfully";
-        header("Location: ./custom-home.php");
-        exit();
-    } else {
-        $_SESSION["error"] = "Something went wrong. Please Try Again";
-        header("Location: ./custom-home.php");
+        header("Location: ./change-logo.php");
         exit();
     }
 }
-
-$home_query = "SELECT * FROM `db_home`";
-$home_result = mysqli_query($conn, $home_query);
-
-$home = mysqli_fetch_assoc($home_result);
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +44,7 @@ $home = mysqli_fetch_assoc($home_result);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Custom Home</title>
+    <title>Change Logo</title>
 
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">
@@ -79,13 +67,13 @@ $home = mysqli_fetch_assoc($home_result);
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-133433427-1');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-133433427-1');
     </script>
 
     <!-- Flatpickr -->
@@ -107,7 +95,8 @@ $home = mysqli_fetch_assoc($home_result);
     <link type="text/css" href="assets/css/vendor-select2.rtl.css" rel="stylesheet">
     <link type="text/css" href="assets/vendor/select2/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
@@ -135,7 +124,7 @@ $home = mysqli_fetch_assoc($home_result);
                         <div class="page__heading">
 
 
-                            <h1 class="m-0">Customize Home Page</h1>
+                            <h1 class="m-0">Upload Logo</h1>
                         </div>
                     </div>
 
@@ -147,43 +136,23 @@ $home = mysqli_fetch_assoc($home_result);
                                 <div class="col-lg-12 card-form__body card-body">
 
                                     <?php if (isset($_SESSION["success"])) { ?>
-                                        <div class="alert alert-success" role="alert">
-                                            <?php echo $_SESSION["success"]; ?>
-                                        </div>
+                                    <div class="alert alert-success" role="alert">
+                                        <?php echo $_SESSION["success"]; ?>
+                                    </div>
                                     <?php }
                                     if (isset($_SESSION["error"])) { ?>
-                                        <div class="alert alert-danger" role="alert">
-                                            <?php echo $_SESSION["error"]; ?>
-                                        </div>
+                                    <div class="alert alert-danger" role="alert">
+                                        <?php echo $_SESSION["error"]; ?>
+                                    </div>
                                     <?php }
                                     session_unset();
                                     ?>
 
-                                    <form method="post" enctype="multipart/form-data">
-
+                                    <form method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <label for="class">Image:</label>
-                                            <input type="file" class="form-control" name="image">
-                                            <p class="text-danger"><?php echo $home["image"]; ?></p>
-                                            <input type="hidden" name="old_image" value="<?php echo $home["image"]; ?>">
+                                            <label for="image">Upload Logo</label>
+                                            <input type="file" class="form-control" name="image" id="image">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="subtitle">Subtitle:</label>
-                                            <input type="text" class="form-control" name="subtitle" placeholder="Enter Subtitle" value="<?php echo $home["subtitle"]; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="title">Headline Title:</label>
-                                            <input type="text" class="form-control" name="title" placeholder="Enter Title" value="<?php echo $home["headline_title"]; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="paragraph">Paragraph:</label>
-                                            <input type="text" class="form-control" name="paragraph" placeholder="Enter Paragraph" value="<?php echo $home["paragraph"]; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="experience">Experience:</label>
-                                            <input type="number" class="form-control" name="experience" placeholder="Enter Experience" value="<?php echo $home["experience"]; ?>">
-                                        </div>
-
                                         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                                     </form>
 

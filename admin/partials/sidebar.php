@@ -49,6 +49,13 @@
                           <span class="sidebar-menu-text">Customize Home</span>
                       </a>
                   </li>
+                  <li class="sidebar-menu-item">
+                      <a class="sidebar-menu-button" href="change-logo.php">
+                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">image
+                          </i>
+                          <span class="sidebar-menu-text">Change Logo</span>
+                      </a>
+                  </li>
 
           </div>
 

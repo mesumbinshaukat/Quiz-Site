@@ -1,3 +1,16 @@
+<?php
+
+include("./admin/connection/connection.php");
+
+$fetch_logo = "SELECT * FROM `db_logo` WHERE `id` = 1";
+$logo = mysqli_query($conn, $fetch_logo);
+$logo = mysqli_fetch_assoc($logo);
+
+$fetch_home_content = "SELECT * FROM `db_home` WHERE `id` = 1";
+$home_content = mysqli_query($conn, $fetch_home_content);
+$home_content = mysqli_fetch_assoc($home_content);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,13 +21,11 @@
     <meta name="keywords"
         content="agency, app, business, company, corporate, designer, freelance, fullpage, modern, office, personal, portfolio, professional, web, web agency">
     <meta name="author" content="Themexriver">
-    <link rel="shortcut icon" href="assets/img/logo/f-icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./logo/<?php echo $logo['logo']; ?>" type="image/x-icon">
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include("./links.php"); ?>
-    <?php if (isset($_COOKIE['email']) && isset($_COOKIE['login'])) : ?>
-    <script src="assets/js/admin-edit.js" defer></script>
-    <?php endif; ?>
+
 </head>
 
 <body class="haptic-home">
@@ -27,7 +38,7 @@
 	============================================= -->
     <?php include("./header.php"); ?>
 
-    <div class="content" id="editable-content">
+    <div class="content">
         <!-- Sidebar sidebar Item -->
         <div class="xs-sidebar-group info-group">
             <div class="xs-overlay xs-bg-black">
@@ -63,26 +74,12 @@
                                 </div>
                                 <div class="sidebar-menu ul-li-block">
                                     <ul>
-                                        <li><a href="about.html"><i class="fal fa-home"></i> About Us </a></li>
-                                        <li><a href="service.html"><i class="fal fa-cogs"></i> Service </a></li>
-                                        <li><a href="testimonila.html"><i class="fal fa-comments-alt"></i> Testimonial
-                                            </a>
-                                        </li>
-                                        <li><a href="team.html"><i class="fal fa-users"></i> Our Team </a></li>
-                                        <li><a href="portfolio.html"><i class="fal fa-briefcase"></i> Portfolio </a>
-                                        </li>
-                                        <li><a href="blog.html"><i class="fal fa-blog"></i> Blog </a></li>
+                                        <li><a href="about.php"><i class="fal fa-home"></i> About Us </a></li>
+
                                         <li><a href="contact.html"><i class="fal fa-envelope"></i> Contact </a></li>
                                     </ul>
                                 </div>
-                                <div class="sidebar-more-menu text-uppercase d-flex ul-li">
-                                    <span>More:</span>
-                                    <ul>
-                                        <li><a href="#">My Account </a></li>
-                                        <li><a href="#">Job Apply </a></li>
-                                        <li><a href="#">Privacy Policy </a></li>
-                                    </ul>
-                                </div>
+
                                 <div class="sidebar-social ul-li-block">
                                     <span>Social:</span>
                                     <ul>
@@ -93,7 +90,7 @@
                                     </ul>
                                 </div>
                                 <div class="sidebar-copyright text-center">
-                                    © Copyright 2023. All Rights Reserved.
+                                    © Copyright 2024. All Rights Reserved.
                                 </div>
                             </div>
                         </div>
@@ -101,87 +98,7 @@
                 </div>
             </div>
         </div>
-        <!-- sidebar cart start -->
-        <div class="cart_sidebar">
-            <div class="cart_sidebar_top">
-                <h2 class="heading_title">Cart</h2>
-                <button class="cart_close_btn tx-close"></button>
-            </div>
-            <div class="cart_items_list">
-                <div class="cart_item">
-                    <div class="item_image">
-                        <img src="assets/img/shop/s_img1.jpg" alt="image_not_found">
-                    </div>
-                    <div class="item_content headline">
-                        <h4 class="item_title">
-                            Rorem ipsum dolor sit amet.
-                        </h4>
-                        <span class="item_price">$19.00</span>
-                        <button class="remove_btn"><i class="fal fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="cart_item">
-                    <div class="item_image">
-                        <img src="assets/img/shop/s_img2.jpg" alt="image_not_found">
-                    </div>
-                    <div class="item_content headline">
-                        <h4 class="item_title">
-                            Rorem ipsum dolor sit amet.
-                        </h4>
-                        <span class="item_price">$22.00</span>
-                        <button class="remove_btn"><i class="fal fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="cart_item">
-                    <div class="item_image">
-                        <img src="assets/img/shop/s_img3.jpg" alt="image_not_found">
-                    </div>
-                    <div class="item_content headline">
-                        <h4 class="item_title">
-                            Rorem ipsum dolor sit amet.
-                        </h4>
-                        <span class="item_price">$43.00</span>
-                        <button class="remove_btn"><i class="fal fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="cart_item">
-                    <div class="item_image">
-                        <img src="assets/img/shop/s_img4.jpg" alt="image_not_found">
-                    </div>
-                    <div class="item_content headline">
-                        <h4 class="item_title">
-                            Rorem ipsum dolor sit amet.
-                        </h4>
-                        <span class="item_price">$14.00</span>
-                        <button class="remove_btn"><i class="fal fa-times"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="cart_sidebar_bottom">
-                <div class="total_price">
-                    <span>Sub Total:</span>
-                    <span>$87.00</span>
-                </div>
-                <div class="cart_sidebar_button">
-                    <a href="#">View Cart</a>
-                    <a href="#">Checkout</a>
-                </div>
-            </div>
-        </div>
-        <!-- search filed -->
-        <div class="search-body">
-            <div class="search-form">
-                <form action="#" class="search-form-area">
-                    <input class="search-input" type="search" placeholder="Search Here">
-                    <button type="submit" class="search-btn1">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-                <div class="outer-close text-center search-btn">
-                    <i class="far fa-times"></i>
-                </div>
-            </div>
-        </div>
+
         <!-- End of Header section
 	============================================= -->
 
@@ -199,10 +116,10 @@
                         <span class="about-shape2 position-absolute"><img src="assets/img/home_5/shape/sh2.png" alt=""
                                 data-parallax='{"x" : 50}'></span>
                         <div class="about-img">
-                            <img src="assets/img/home_5/about/ab1.png" alt="">
+                            <img src="assets/img/home_5/about/<?= $home_content['image']; ?>" alt="">
                         </div>
                         <div class="about-exp hap-headline position-absolute">
-                            <h3><strong class="counter">32</strong>+</h3>
+                            <h3><strong class="counter"><?= $home_content['experience']; ?></strong>+</h3>
                             <span>Years
                                 Experinece</span>
                         </div>
@@ -212,59 +129,19 @@
                             <div class="hap-section-title bins-text hap-headline pera-content">
                                 <div class="sub-title text-uppercase wow fadeInRight" data-wow-delay="200ms"
                                     data-wow-duration="1000ms">
-                                    OVER 150.000+ CLIENTS
+                                    <?= $home_content['subtitle']; ?>
                                 </div>
-                                <h2 class="text-uppercase headline-title">creative roblem
-                                    solving innovations</h2>
-                                <p>On the other hand, We denounce with righteous indignation And Dislike men who are
-                                    beguiled and demoralized the Charms of Pleasure At vero eos et</p>
+                                <h2 class="text-uppercase headline-title"><?= $home_content['headline_title']; ?></h2>
+                                <p><?= $home_content['paragraph']; ?></p>
                             </div>
                             <div
                                 class="hap-about-feature-area d-flex justify-content-between flex-wrap position-relative">
-                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp"
-                                    data-wow-delay="200ms" data-wow-duration="1000ms">
-                                    <div class="feature-icon">
-                                        <img src="assets/img/home_5/icon/ic1.png" alt="">
-                                    </div>
-                                    <div class="feature-text hap-headline">
-                                        <h3>Brand Strategy &
-                                            Art Direction</h3>
-                                    </div>
-                                </div>
-                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp"
-                                    data-wow-delay="300ms" data-wow-duration="1000ms">
-                                    <div class="feature-icon">
-                                        <img src="assets/img/home_5/icon/ic2.png" alt="">
-                                    </div>
-                                    <div class="feature-text hap-headline">
-                                        <h3>UX/UI Design &
-                                            Website/App Design</h3>
-                                    </div>
-                                </div>
-                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp"
-                                    data-wow-delay="400ms" data-wow-duration="1000ms">
-                                    <div class="feature-icon">
-                                        <img src="assets/img/home_5/icon/ic3.png" alt="">
-                                    </div>
-                                    <div class="feature-text hap-headline">
-                                        <h3>Trendinf designing
-                                            experience.</h3>
-                                    </div>
-                                </div>
-                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp"
-                                    data-wow-delay="500ms" data-wow-duration="1000ms">
-                                    <div class="feature-icon">
-                                        <img src="assets/img/home_5/icon/ic4.png" alt="">
-                                    </div>
-                                    <div class="feature-text hap-headline">
-                                        <h3>Brand Strategy &
-                                            Art Direction</h3>
-                                    </div>
-                                </div>
+
+
                             </div>
                             <div class="hap-btn text-uppercase wow flipInX" data-wow-delay="500ms"
                                 data-wow-duration="1000ms">
-                                <a href="about.html">about Us <i class="far fa-arrow-right"></i></a>
+                                <a href="about.php">about Us <i class="far fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -274,284 +151,6 @@
         <!-- End of About section
 	============================================= -->
 
-        <!-- Start of Service section
-	============================================= -->
-        <section id="hap-service" class="hap-service-section position-relative"
-            data-background="assets/img/home_5/bg/service-bg.jpg">
-            <div class="container">
-                <div class="hap-section-title hap-headline dark-bg-title text-center pera-content">
-                    <div class="sub-title text-uppercase wow fadeInRight" data-wow-delay="200ms"
-                        data-wow-duration="1000ms">
-                        web design & development
-                    </div>
-                    <h2 class="text-uppercase headline-title">We Empower
-                        Clients to be loved</h2>
-                </div>
-                <div class="hap-service-content">
-                    <div class="hap-service-item  hap-img-animation position-relative d-flex justify-content-between">
-                        <div class="hap-service-title-icon d-flex align-items-center">
-                            <div class="service-icon">
-                                <i class="flaticon-profit"></i>
-                            </div>
-                            <div class="service-title hap-headline">
-                                <h3><a href="portfolio-single.html"> Development</a></h3>
-                                <span class="text-uppercase">Guarenteed quality control</span>
-                            </div>
-                        </div>
-                        <div class="hap-service-category-arrow d-flex align-items-center">
-                            <div class="service-category text-uppercase">
-                                <a href="#">Creative</a>
-                                <a href="#">accessiblilty</a>
-                            </div>
-                            <div class="service-arrow">
-                                <a href="portfolio-single.html"><i class="fas fa-long-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="service-hover d-none d-md-block" data-background="assets/img/home_5/about/faq2.jpg">
-                        </div>
-                    </div>
-                    <div class="hap-service-item hap-img-animation position-relative d-flex justify-content-between">
-                        <div class="hap-service-title-icon d-flex align-items-center">
-                            <div class="service-icon">
-                                <i class="flaticon-profit"></i>
-                            </div>
-                            <div class="service-title hap-headline">
-                                <h3><a href="portfolio-single.html"> Marketing</a></h3>
-                                <span class="text-uppercase">Guarenteed quality control</span>
-                            </div>
-                        </div>
-                        <div class="hap-service-category-arrow d-flex align-items-center">
-                            <div class="service-category text-uppercase">
-                                <a href="portfolio.html">Creative</a>
-                                <a href="portfolio.html">accessiblilty</a>
-                            </div>
-                            <div class="service-arrow">
-                                <a href="portfolio-single.html"><i class="fas fa-long-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="service-hover d-none d-md-block" data-background="assets/img/home_5/about/faq2.jpg">
-                        </div>
-                    </div>
-                    <div class="hap-service-item hap-img-animation position-relative d-flex justify-content-between">
-                        <div class="hap-service-title-icon d-flex align-items-center">
-                            <div class="service-icon">
-                                <i class="flaticon-profit"></i>
-                            </div>
-                            <div class="service-title hap-headline">
-                                <h3><a href="portfolio-single.html"> Branding & SEO</a></h3>
-                                <span class="text-uppercase">Guarenteed quality control</span>
-                            </div>
-                        </div>
-                        <div class="hap-service-category-arrow d-flex align-items-center">
-                            <div class="service-category text-uppercase">
-                                <a href="portfolio.html">Creative</a>
-                                <a href="portfolio.html">accessiblilty</a>
-                            </div>
-                            <div class="service-arrow">
-                                <a href="portfolio-single.html"><i class="fas fa-long-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="service-hover d-none d-md-block" data-background="assets/img/home_5/about/faq2.jpg">
-                        </div>
-                    </div>
-                    <div class="hap-service-item hap-img-animation position-relative d-flex justify-content-between">
-                        <div class="hap-service-title-icon d-flex align-items-center">
-                            <div class="service-icon">
-                                <i class="flaticon-profit"></i>
-                            </div>
-                            <div class="service-title hap-headline">
-                                <h3><a href="portfolio-single.html"> UI/UX Design</a></h3>
-                                <span class="text-uppercase">Guarenteed quality control</span>
-                            </div>
-                        </div>
-                        <div class="hap-service-category-arrow d-flex align-items-center">
-                            <div class="service-category text-uppercase">
-                                <a href="portfolio.html">Creative</a>
-                                <a href="portfolio.html">accessiblilty</a>
-                            </div>
-                            <div class="service-arrow">
-                                <a href="portfolio-single.html"><i class="fas fa-long-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="service-hover d-none d-md-block" data-background="assets/img/home_5/about/faq2.jpg">
-                        </div>
-                    </div>
-                </div>
-                <div class="hap-service-scroll-text-area hap-headline">
-                    <div class="hap-section-title hap-headline dark-bg-title text-center pera-content">
-                        <div class="sub-title text-uppercase">
-                            More than 200+ companies trusted us worldwide
-                        </div>
-                    </div>
-                    <h2 class="text-uppercase">
-                        innovated
-                        <div class="text_scroller_1 scroller_item_1 ul-li">
-                            <ul>
-                                <li>Creative</li>
-                                <li>SEO</li>
-                                <li>HTML</li>
-                                <li>Development</li>
-                            </ul>
-                        </div>
-                        on-side
-                    </h2>
-                    <h2 class="text-uppercase">
-                        Search Engine <span class="strock_txt"> Experts</span>
-                        <img src="assets/img/home_5/about/sr1.png" alt="">
-                    </h2>
-                    <h2 class="text-uppercase">
-                        <span class="text_scroller_2 scroller_item_1 ul-li"
-                            data-background="assets/img/home_5/bg/scroll-bg.png">
-                            <ul>
-                                <li>Creative</li>
-                                <li>SEO</li>
-                                <li>HTML</li>
-                                <li>Development</li>
-                            </ul>
-                        </span>
-                        Social Marketing
-                    </h2>
-                    <h2 class="text-uppercase">
-                        <span class="strock_txt">since 2015</span>
-                        <div class="text_scroller_3 scroller_item_1 ul-li">
-                            <ul>
-                                <li>Creative</li>
-                                <li>SEO</li>
-                                <li>HTML</li>
-                                <li>Development</li>
-                                <li>Email Marketing</li>
-                            </ul>
-                        </div>
-                    </h2>
-                </div>
-            </div>
-        </section>
-        <!-- End of Service section
-	============================================= -->
-
-
-        <!-- Start of Counter section
-	============================================= -->
-        <section id="hap-counter" class="hap-counter-section  position-relative">
-            <div class="container">
-                <div class="hap-counter-content">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="hap-counter-item position-relative hap-headline pera-content">
-                                <h3><span class="counter">28</span>K</h3>
-                                <p>Year Of Experience</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="hap-counter-item position-relative hap-headline pera-content">
-                                <h3><span class="counter">4</span>K</h3>
-                                <p>Projects Completed</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="hap-counter-item position-relative hap-headline pera-content">
-                                <h3><span class="counter">12</span>K</h3>
-                                <p>Happy Customers</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="hap-counter-item position-relative hap-headline pera-content">
-                                <h3><span class="counter">17</span>K</h3>
-                                <p>Happy Customers</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End of Counter section
-	============================================= -->
-
-        <!-- Start of Testimonial section
-	============================================= -->
-        <section id="hap-testimonial" class="hap-testimonial-section position-relative"
-            data-background="assets/img/home_5/bg/test-bg.png">
-            <div class="container">
-                <div class="hap-testimonial-content position-relative">
-                    <div class="hap-testimonial-slider swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="hap-testimonial-item d-flex align-items-center justify-content-center">
-                                    <div class="testimoial-img position-relative">
-                                        <img src="assets/img/home_5/about/tst1.png" alt="">
-                                    </div>
-                                    <div class="testimoial-text-author position-relative" data-background="">
-                                        <div class="testimonial-desc">
-                                            On the other hand, We denounce with righteous indignation And Dislike men
-                                            who
-                                            are beguiled and demoralized the Charms of Pleasure At vero eos et accusamus
-                                            et
-                                            iusto odio Dignis
-                                        </div>
-                                        <div class="testimonial-author hap-headline">
-                                            <h3>Mike Hardson</h3>
-                                            <span>Director</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="hap-testimonial-item d-flex align-items-center justify-content-center">
-                                    <div class="testimoial-img position-relative">
-                                        <img src="assets/img/home_5/about/tst1.png" alt="">
-                                    </div>
-                                    <div class="testimoial-text-author position-relative" data-background="">
-                                        <div class="testimonial-desc">
-                                            On the other hand, We denounce with righteous indignation And Dislike men
-                                            who
-                                            are beguiled and demoralized the Charms of Pleasure At vero eos et accusamus
-                                            et
-                                            iusto odio Dignis
-                                        </div>
-                                        <div class="testimonial-author hap-headline">
-                                            <h3>Mike Hardson</h3>
-                                            <span>Director</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="hap-testimonial-item d-flex align-items-center justify-content-center">
-                                    <div class="testimoial-img position-relative">
-                                        <img src="assets/img/home_5/about/tst1.png" alt="">
-                                    </div>
-                                    <div class="testimoial-text-author position-relative" data-background="">
-                                        <div class="testimonial-desc">
-                                            On the other hand, We denounce with righteous indignation And Dislike men
-                                            who
-                                            are beguiled and demoralized the Charms of Pleasure At vero eos et accusamus
-                                            et
-                                            iusto odio Dignis
-                                        </div>
-                                        <div class="testimonial-author hap-headline">
-                                            <h3>Mike Hardson</h3>
-                                            <span>Director</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hap-carousel-arrow-next-prev  d-flex">
-                        <div
-                            class="hap-slider-arrow d-flex justify-content-center align-items-center hap-testimonial-button-prev">
-                            <i class="far fa-long-arrow-left"></i>
-                        </div>
-                        <div
-                            class="hap-slider-arrow d-flex justify-content-center align-items-center hap-testimonial-button-next">
-                            <i class="far fa-long-arrow-right"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End of Testimonial section
-	============================================= -->
 
 
         <!-- Start of Footer section
@@ -649,9 +248,7 @@
     <?php include("./scripts.php") ?>
     <!-- Save button -->
     <!-- Save button -->
-    <button id="save-button"
-        style="display:none; position:fixed; bottom:10px; right:10px; padding:10px 20px; background-color:#28a745; color:#fff; border:none; border-radius:5px;">Save
-        Changes</button>
+
 </body>
 
 </html>
