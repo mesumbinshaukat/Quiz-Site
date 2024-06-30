@@ -3,37 +3,35 @@ session_start();
 
 include("./connection/connection.php");
 
-if (isset($_COOKIE["login"]) && isset($_COOKIE["name"])) {
-    header("Location: index.php");
+if (!isset($_SESSION["sent"]) || $_SESSION["sent"] != "sent") {
+    $_SESSION["error"] = "Please verify your email first!";
+    header("Location: ./signup.php");
     exit();
 }
 
-if (isset($_POST["login"])) {
-    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+if (isset($_POST["submit"])) {
 
-    $password = $_POST["password"];
+    $verify_code = (int) $_SESSION["code"];
+    $code = (int) $_POST["code"];
 
-    $query = "SELECT * FROM `db_parents` WHERE `email` = '$email'";
+    if ($code == $verify_code) {
+        $name = $_SESSION["name"];
+        $email = $_SESSION["email"];
+        $password = $_SESSION["password"];
+        $gender = $_SESSION["gender"];
 
-    $result = mysqli_query($conn, $query);
+        $sql = "INSERT INTO `db_parents`(`name`, `email`, `password`, `gender`) VALUES ('$name', '$email', '$password', '$gender')";
+        $result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        if (password_verify($password, $row["password"])) {
-            $login_bool = true;
-            setcookie("name", $row["name"], time() + (86400 * 30), "/");
-            setcookie("login", $login_bool, time() + (86400 * 30), "/");
-            setcookie("email", $email, time() + (86400 * 30), "/");
-            $_SESSION["login_success"] = "Login Successfull";
-            header("Location: index.php");
+        if ($result) {
+            $_SESSION["success"] = "Account created successfully!";
+            header("Location: ./login.php");
             exit();
         } else {
-            $_SESSION["error"] = "Invalid Password";
-            header("Location: login.php");
-            exit();
+            $_SESSION["error"] = "Something went wrong!";
         }
     } else {
-        $_SESSION["error"] = "Invalid Credentials";
+        $_SESSION["error"] = "Something went wrong!";
     }
 }
 ?>
@@ -45,10 +43,7 @@ if (isset($_POST["login"])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Parent LogIn</title>
-
-    <!-- Prevent the demo from appearing in search engines -->
-    <meta name="robots" content="noindex">
+    <title>Parent Register</title>
 
     <!-- Perfect Scrollbar -->
     <link type="text/css" href="assets/vendor/perfect-scrollbar.css" rel="stylesheet">
@@ -88,13 +83,22 @@ if (isset($_POST["login"])) {
     <div class="layout-login__form bg-white" data-perfect-scrollbar>
         <div class="d-flex justify-content-center mt-2 mb-5 navbar-light">
             <a href="index.html" class="navbar-brand" style="min-width: 0">
-                <img class="navbar-brand-icon" src="assets/images/stack-logo-blue.svg" width="25" alt="Stack">
+                <img class="navbar-brand-icon" src="assets/images/stack-logo-blue.svg" width="25" alt="FlowDash">
                 <span>Quiz Website</span>
             </a>
         </div>
 
-        <h4 class="m-0">Welcome back!</h4>
-        <p class="mb-5">Login to access your Account </p>
+        <h4 class="m-0">Verify Your Email</h4>
+
+        <?php
+
+        if (isset($_SESSION["sent"]) && $_SESSION["sent"] == "sent") {
+            echo "<div class='alert alert-success' role='alert'>
+                We have sent an email to your email address. Please copy the code and paste down below in input field.
+
+            </div>";
+        }
+        ?>
 
         <?php
 
@@ -104,46 +108,18 @@ if (isset($_POST["login"])) {
             </div>";
         }
 
-        if (isset($_SESSION["success"])) {
-            echo "<div class='alert alert-success' role='alert'>
-                " . $_SESSION["success"] . "
-            </div>";
-        }
-
-        session_unset();
         ?>
 
-
         <form method="POST">
+
             <div class="form-group">
-                <label class="text-label" for="email">Email Address:</label>
-                <div class="input-group input-group-merge">
-                    <input id="email" type="email" required name="email" class="form-control form-control-prepended"
-                        placeholder="Your Registered Email...">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <span class="far fa-envelope"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="text-label" for="password">Password:</label>
-                <div class="input-group input-group-merge">
-                    <input id="password" type="password" name="password" required=""
-                        class="form-control form-control-prepended" placeholder="Password...">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <span class="fa fa-key"></span>
-                        </div>
-                    </div>
-                </div>
+                <label for="code">Code:</label>
+                <input type="number" class="form-control" id="code" name="code" required>
             </div>
 
             <div class="form-group text-center">
-                <button class="btn btn-primary mb-5" type="submit" name="login">Login</button><br>
-
-                Don't have an account? <a class="text-body text-underline" href="signup.php">Sign up!</a>
+                <button class="btn btn-primary mb-2" type="submit" name="submit">Verify</button><br>
+                <a class="text-body text-underline" href="login.php">Have an account? Login</a>
             </div>
         </form>
     </div>
@@ -174,16 +150,6 @@ if (isset($_POST["login"])) {
     <!-- App Settings (safe to remove) -->
     <script src="assets/js/app-settings.js"></script>
 
-    <?php if (isset($_SESSION["success"])) {
-        echo '<script>toastr.success("' . $_SESSION["success"] . '");</script>';
-    }
-
-    if (isset($_SESSION["error"])) {
-        echo '<script>toastr.error("' . $_SESSION["error"] . '");</script>';
-    }
-
-    session_unset();
-    ?>
 
 </body>
 

@@ -21,7 +21,7 @@ $logo = mysqli_fetch_assoc($logo);
                 <!-- Navbar Brand -->
                 <a href="index.php" class="navbar-brand ">
 
-                    <img src="../../logo/<?= $logo['logo'] ?>" alt="<?= $logo['logo'] ?>" width="50">
+                    <span>ADMIN PANEL</span>
                 </a>
 
 

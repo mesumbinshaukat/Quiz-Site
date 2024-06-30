@@ -3,6 +3,13 @@ session_start();
 
 include("./connection/connection.php");
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require '../vendor/autoload.php';
+
 if (isset($_POST["submit"])) {
 
     $name = $_POST["name"];
@@ -10,15 +17,47 @@ if (isset($_POST["submit"])) {
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $gender = $_POST["gender"];
 
-    $sql = "INSERT INTO `db_parents`(`name`, `email`, `password`, `gender`) VALUES ('$name', '$email', '$password', '$gender')";
-    $result = mysqli_query($conn, $sql);
+    $_SESSION["name"] = $name;
+    $_SESSION["email"] = $email;
+    $_SESSION["password"] = $password;
+    $_SESSION["gender"] = $gender;
 
-    if ($result) {
-        $_SESSION["success"] = "Parent added successfully!";
-        header("Location: ./login.php");
-        exit();
-    } else {
-        $_SESSION["error"] = "Something went wrong!";
+    $code_gen = rand(100000, 999999);
+    $_SESSION["code"] = $code_gen;
+
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = 2;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'soccer.club.techwiz@gmail.com';                     //SMTP username
+        $mail->Password   = 'nohb egvn rivj fhlc';                               //SMTP password
+        $mail->SMTPSecure = "ssl";            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('soccer.club.techwiz@gmail.com', 'Quiz Website');
+        $mail->addAddress($email, $name);     //Add a recipient
+
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Verification Code';
+        $mail->Body    = 'Hello ' . $name . ',<br><br> Your verification code is: ' . $code_gen;
+
+        if ($mail->send()) {
+            $_SESSION["sent"] = "sent";
+            header("Location: verification.php");
+            exit();
+        } else {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
 ?>
@@ -31,9 +70,6 @@ if (isset($_POST["submit"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Parent Register</title>
-
-    <!-- Prevent the demo from appearing in search engines -->
-    <meta name="robots" content="noindex">
 
     <!-- Perfect Scrollbar -->
     <link type="text/css" href="assets/vendor/perfect-scrollbar.css" rel="stylesheet">
@@ -53,17 +89,16 @@ if (isset($_POST["submit"])) {
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-133433427-1');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-133433427-1');
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
@@ -74,19 +109,34 @@ if (isset($_POST["submit"])) {
         <div class="d-flex justify-content-center mt-2 mb-5 navbar-light">
             <a href="index.html" class="navbar-brand" style="min-width: 0">
                 <img class="navbar-brand-icon" src="assets/images/stack-logo-blue.svg" width="25" alt="FlowDash">
-                <span>FlowDash</span>
+                <span>Quiz Website</span>
             </a>
         </div>
 
         <h4 class="m-0">Sign up!</h4>
         <p class="mb-5">Create an account</p>
+        <?php
+
+        if (isset($_SESSION["error"])) {
+            echo "<div class='alert alert-danger' role='alert'>
+                " . $_SESSION["error"] . "
+            </div>";
+        }
+
+        if (isset($_SESSION["success"])) {
+            echo "<div class='alert alert-success' role='alert'>
+                " . $_SESSION["success"] . "
+            </div>";
+        }
+
+        session_unset();
+        ?>
 
         <form method="POST">
             <div class="form-group">
                 <label class="text-label" for="name">Name:</label>
                 <div class="input-group input-group-merge">
-                    <input id="name" type="text" name="name" required class="form-control form-control-prepended"
-                        placeholder="Enter your name here...">
+                    <input id="name" type="text" name="name" required class="form-control form-control-prepended" placeholder="Enter your name here...">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-user"></span>
@@ -97,8 +147,7 @@ if (isset($_POST["submit"])) {
             <div class="form-group">
                 <label class="text-label" for="email">Email Address:</label>
                 <div class="input-group input-group-merge">
-                    <input id="email" type="email" name="email" required class="form-control form-control-prepended"
-                        placeholder="Enter your email...">
+                    <input id="email" type="email" name="email" required class="form-control form-control-prepended" placeholder="Enter your email...">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-envelope"></span>
@@ -109,8 +158,7 @@ if (isset($_POST["submit"])) {
             <div class="form-group">
                 <label class="text-label" for="password">Password:</label>
                 <div class="input-group input-group-merge">
-                    <input id="password" name="password" type="password" required
-                        class="form-control form-control-prepended" placeholder="Enter your password">
+                    <input id="password" name="password" type="password" required class="form-control form-control-prepended" placeholder="Enter your password">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-key"></span>
