@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <title>Quiz Site</title>
     <meta name="description" content="Haptic - Web And Agency HTML Template">
-    <meta name="keywords" content="agency, app, business, company, corporate, designer, freelance, fullpage, modern, office, personal, portfolio, professional, web, web agency">
+    <meta name="keywords"
+        content="agency, app, business, company, corporate, designer, freelance, fullpage, modern, office, personal, portfolio, professional, web, web agency">
     <meta name="author" content="Themexriver">
     <link rel="shortcut icon" href="assets/img/logo/f-icon.png" type="image/x-icon">
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include("./links.php"); ?>
     <?php if (isset($_COOKIE['email']) && isset($_COOKIE['login'])) : ?>
-        <script src="assets/js/admin-edit.js" defer></script>
+    <script src="assets/js/admin-edit.js" defer></script>
     <?php endif; ?>
 </head>
 
@@ -191,9 +192,12 @@
         <section id="hap-about" class="hap-about-section">
             <div class="container">
                 <div class="hap-about-content position-relative">
-                    <div class="hap-about-img-area position-absolute wow slideInLeft" data-wow-delay="50ms" data-wow-duration="2000ms">
-                        <span class="about-shape1 position-absolute"><img src="assets/img/home_5/shape/sh1.png" alt="" data-parallax='{"x" : -50}'></span>
-                        <span class="about-shape2 position-absolute"><img src="assets/img/home_5/shape/sh2.png" alt="" data-parallax='{"x" : 50}'></span>
+                    <div class="hap-about-img-area position-absolute wow slideInLeft" data-wow-delay="50ms"
+                        data-wow-duration="2000ms">
+                        <span class="about-shape1 position-absolute"><img src="assets/img/home_5/shape/sh1.png" alt=""
+                                data-parallax='{"x" : -50}'></span>
+                        <span class="about-shape2 position-absolute"><img src="assets/img/home_5/shape/sh2.png" alt=""
+                                data-parallax='{"x" : 50}'></span>
                         <div class="about-img">
                             <img src="assets/img/home_5/about/ab1.png" alt="">
                         </div>
@@ -206,7 +210,8 @@
                     <div class="hap-about-text-wrapper d-flex justify-content-end">
                         <div class="hap-about-text-area">
                             <div class="hap-section-title bins-text hap-headline pera-content">
-                                <div class="sub-title text-uppercase wow fadeInRight" data-wow-delay="200ms" data-wow-duration="1000ms">
+                                <div class="sub-title text-uppercase wow fadeInRight" data-wow-delay="200ms"
+                                    data-wow-duration="1000ms">
                                     OVER 150.000+ CLIENTS
                                 </div>
                                 <h2 class="text-uppercase headline-title">creative roblem
@@ -214,8 +219,10 @@
                                 <p>On the other hand, We denounce with righteous indignation And Dislike men who are
                                     beguiled and demoralized the Charms of Pleasure At vero eos et</p>
                             </div>
-                            <div class="hap-about-feature-area d-flex justify-content-between flex-wrap position-relative">
-                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1000ms">
+                            <div
+                                class="hap-about-feature-area d-flex justify-content-between flex-wrap position-relative">
+                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp"
+                                    data-wow-delay="200ms" data-wow-duration="1000ms">
                                     <div class="feature-icon">
                                         <img src="assets/img/home_5/icon/ic1.png" alt="">
                                     </div>
@@ -224,7 +231,8 @@
                                             Art Direction</h3>
                                     </div>
                                 </div>
-                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1000ms">
+                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp"
+                                    data-wow-delay="300ms" data-wow-duration="1000ms">
                                     <div class="feature-icon">
                                         <img src="assets/img/home_5/icon/ic2.png" alt="">
                                     </div>
@@ -233,7 +241,8 @@
                                             Website/App Design</h3>
                                     </div>
                                 </div>
-                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1000ms">
+                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp"
+                                    data-wow-delay="400ms" data-wow-duration="1000ms">
                                     <div class="feature-icon">
                                         <img src="assets/img/home_5/icon/ic3.png" alt="">
                                     </div>
@@ -242,7 +251,8 @@
                                             experience.</h3>
                                     </div>
                                 </div>
-                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp" data-wow-delay="500ms" data-wow-duration="1000ms">
+                                <div class="hap-about-feature-item d-flex align-items-center wow fadeInUp"
+                                    data-wow-delay="500ms" data-wow-duration="1000ms">
                                     <div class="feature-icon">
                                         <img src="assets/img/home_5/icon/ic4.png" alt="">
                                     </div>
@@ -252,7 +262,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="hap-btn text-uppercase wow flipInX" data-wow-delay="500ms" data-wow-duration="1000ms">
+                            <div class="hap-btn text-uppercase wow flipInX" data-wow-delay="500ms"
+                                data-wow-duration="1000ms">
                                 <a href="about.html">about Us <i class="far fa-arrow-right"></i></a>
                             </div>
                         </div>
@@ -265,10 +276,12 @@
 
         <!-- Start of Service section
 	============================================= -->
-        <section id="hap-service" class="hap-service-section position-relative" data-background="assets/img/home_5/bg/service-bg.jpg">
+        <section id="hap-service" class="hap-service-section position-relative"
+            data-background="assets/img/home_5/bg/service-bg.jpg">
             <div class="container">
                 <div class="hap-section-title hap-headline dark-bg-title text-center pera-content">
-                    <div class="sub-title text-uppercase wow fadeInRight" data-wow-delay="200ms" data-wow-duration="1000ms">
+                    <div class="sub-title text-uppercase wow fadeInRight" data-wow-delay="200ms"
+                        data-wow-duration="1000ms">
                         web design & development
                     </div>
                     <h2 class="text-uppercase headline-title">We Empower
@@ -387,7 +400,8 @@
                         <img src="assets/img/home_5/about/sr1.png" alt="">
                     </h2>
                     <h2 class="text-uppercase">
-                        <span class="text_scroller_2 scroller_item_1 ul-li" data-background="assets/img/home_5/bg/scroll-bg.png">
+                        <span class="text_scroller_2 scroller_item_1 ul-li"
+                            data-background="assets/img/home_5/bg/scroll-bg.png">
                             <ul>
                                 <li>Creative</li>
                                 <li>SEO</li>
@@ -455,7 +469,8 @@
 
         <!-- Start of Testimonial section
 	============================================= -->
-        <section id="hap-testimonial" class="hap-testimonial-section position-relative" data-background="assets/img/home_5/bg/test-bg.png">
+        <section id="hap-testimonial" class="hap-testimonial-section position-relative"
+            data-background="assets/img/home_5/bg/test-bg.png">
             <div class="container">
                 <div class="hap-testimonial-content position-relative">
                     <div class="hap-testimonial-slider swiper-container">
@@ -523,10 +538,12 @@
                         </div>
                     </div>
                     <div class="hap-carousel-arrow-next-prev  d-flex">
-                        <div class="hap-slider-arrow d-flex justify-content-center align-items-center hap-testimonial-button-prev">
+                        <div
+                            class="hap-slider-arrow d-flex justify-content-center align-items-center hap-testimonial-button-prev">
                             <i class="far fa-long-arrow-left"></i>
                         </div>
-                        <div class="hap-slider-arrow d-flex justify-content-center align-items-center hap-testimonial-button-next">
+                        <div
+                            class="hap-slider-arrow d-flex justify-content-center align-items-center hap-testimonial-button-next">
                             <i class="far fa-long-arrow-right"></i>
                         </div>
                     </div>
@@ -632,39 +649,9 @@
     <?php include("./scripts.php") ?>
     <!-- Save button -->
     <!-- Save button -->
-    <button id="save-button" style="display:none; position:fixed; bottom:10px; right:10px; padding:10px 20px; background-color:#28a745; color:#fff; border:none; border-radius:5px;">Save
+    <button id="save-button"
+        style="display:none; position:fixed; bottom:10px; right:10px; padding:10px 20px; background-color:#28a745; color:#fff; border:none; border-radius:5px;">Save
         Changes</button>
 </body>
 
 </html>
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_COOKIE['email']) && isset($_COOKIE['login'])) {
-    $changes = json_decode(file_get_contents('php://input'), true);
-
-    if (!empty($changes)) {
-        $file_path = __FILE__;
-        $html = file_get_contents($file_path);
-
-        foreach ($changes as $id => $change) {
-            $attribute = $change['attribute'];
-            $value = $change['value'];
-
-            if ($attribute === 'innerHTML') {
-                $pattern = '/(<[^>]*id="' . $id . '"[^>]*>)(.*?)(<\/[^>]*>)/si';
-                $replacement = '$1' . $value . '$3';
-            } else {
-                $pattern = '/(<[^>]*id="' . $id . '"[^>]*)(\s' . $attribute . '="[^"]*")?([^>]*>)/si';
-                $replacement = '$1 ' . $attribute . '="' . $value . '" $3';
-            }
-            $html = preg_replace($pattern, $replacement, $html);
-        }
-
-        file_put_contents($file_path, $html);
-        echo json_encode(['status' => 'success']);
-    } else {
-        echo json_encode(['status' => 'no_changes']);
-    }
-    exit;
-}
-?>

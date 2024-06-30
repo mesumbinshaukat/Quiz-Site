@@ -16,6 +16,7 @@ if (!isset($_COOKIE["email"]) && !isset($_COOKIE["login"])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Panel</title>
 
     <!-- Perfect Scrollbar -->
     <link type="text/css" href="assets/vendor/perfect-scrollbar.css" rel="stylesheet">
