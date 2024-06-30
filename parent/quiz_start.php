@@ -76,13 +76,13 @@ $_SESSION['quiz_id'] = $quiz_id;
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-133433427-1');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-133433427-1');
     </script>
 </head>
 
@@ -114,26 +114,29 @@ $_SESSION['quiz_id'] = $quiz_id;
                         <form method="post" action="result.php">
 
                             <?php foreach ($quiz_data as $index => $question) : ?>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?php echo ($index + 1) . '. ' . $question['question']; ?>
-                                        </h5>
-                                        <?php if (isset($question['options']) && is_array($question['options'])) : ?>
-                                            <?php foreach ($question['options'] as $optionIndex => $option) : ?>
-                                                <?php
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo ($index + 1) . '. ' . $question['question']; ?>
+                                    </h5>
+                                    <?php if (isset($question['options']) && is_array($question['options'])) : ?>
+                                    <?php foreach ($question['options'] as $optionIndex => $option) : ?>
+                                    <?php
                                                 // Generate a unique ID for each option based on question index and option index
                                                 $optionId = "option-$index-$optionIndex";
                                                 ?>
-                                                <div class="custom-control custom-radio" style="background-color: #FFE5B4;">
-                                                    <input type="radio" id="<?php echo $optionId; ?>" name="answers[<?php echo $index; ?>]" class="custom-control-input" value="<?php echo htmlspecialchars($option); ?>">
-                                                    <label class="custom-control-label" for="<?php echo $optionId; ?>"><?php echo htmlspecialchars($option); ?></label>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        <?php else : ?>
-                                            <p class="text-danger">Options not available for this question.</p>
-                                        <?php endif; ?>
+                                    <div class="custom-control custom-radio" style="background-color: #FFE5B4;">
+                                        <input type="radio" id="<?php echo $optionId; ?>"
+                                            name="answers[<?php echo $index; ?>]" class="custom-control-input"
+                                            value="<?php echo htmlspecialchars($option); ?>">
+                                        <label class="custom-control-label"
+                                            for="<?php echo $optionId; ?>"><?php echo htmlspecialchars($option); ?></label>
                                     </div>
+                                    <?php endforeach; ?>
+                                    <?php else : ?>
+                                    <p class="text-danger">Options not available for this question.</p>
+                                    <?php endif; ?>
                                 </div>
+                            </div>
                             <?php endforeach; ?>
 
                             <button type="submit" class="btn btn-primary mt-3">Submit Quiz</button>
@@ -157,16 +160,6 @@ $_SESSION['quiz_id'] = $quiz_id;
 
     </div>
     <!-- // END header-layout -->
-
-    <!-- App Settings FAB -->
-    <div id="app-settings">
-        <app-settings layout-active="default" :layout-location="{
-      'default': 'ui-forms.html',
-      'fixed': 'fixed-ui-forms.html',
-      'fluid': 'fluid-ui-forms.html',
-      'mini': 'mini-ui-forms.html'
-    }"></app-settings>
-    </div>
 
     <!-- jQuery -->
     <script src="assets/vendor/jquery.min.js"></script>

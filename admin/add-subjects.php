@@ -61,13 +61,13 @@ $query_run_class = mysqli_query($conn, $class_query);
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-133433427-1');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-133433427-1');
     </script>
 
     <!-- Flatpickr -->
@@ -89,8 +89,7 @@ $query_run_class = mysqli_query($conn, $class_query);
     <link type="text/css" href="assets/css/vendor-select2.rtl.css" rel="stylesheet">
     <link type="text/css" href="assets/vendor/select2/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
@@ -130,14 +129,14 @@ $query_run_class = mysqli_query($conn, $class_query);
                                 <div class="col-lg-12 card-form__body card-body">
 
                                     <?php if (isset($_SESSION["success"])) { ?>
-                                    <div class="alert alert-success" role="alert">
-                                        <?php echo $_SESSION["success"]; ?>
-                                    </div>
+                                        <div class="alert alert-success" role="alert">
+                                            <?php echo $_SESSION["success"]; ?>
+                                        </div>
                                     <?php }
                                     if (isset($_SESSION["error"])) { ?>
-                                    <div class="alert alert-danger" role="alert">
-                                        <?php echo $_SESSION["error"]; ?>
-                                    </div>
+                                        <div class="alert alert-danger" role="alert">
+                                            <?php echo $_SESSION["error"]; ?>
+                                        </div>
                                     <?php }
                                     session_unset();
                                     ?>
@@ -145,8 +144,7 @@ $query_run_class = mysqli_query($conn, $class_query);
                                     <form method="post">
                                         <div class="form-group">
                                             <label for="subject">Subject Name:</label>
-                                            <input type="text" id="subject" class="form-control" name="subject"
-                                                placeholder="Enter Subject Name">
+                                            <input type="text" id="subject" class="form-control" name="subject" placeholder="Enter Subject Name">
                                         </div>
 
 
@@ -155,7 +153,7 @@ $query_run_class = mysqli_query($conn, $class_query);
                                             <select name="class" class="form-control">
 
                                                 <?php while ($row = mysqli_fetch_assoc($query_run_class)) { ?>
-                                                <option value="<?= $row["id"] ?>"><?= $row["class"] ?></option>
+                                                    <option value="<?= $row["id"] ?>"><?= $row["class"] ?></option>
 
                                                 <?php } ?>
 
@@ -184,16 +182,6 @@ $query_run_class = mysqli_query($conn, $class_query);
 
     </div>
     <!-- // END header-layout -->
-
-    <!-- App Settings FAB -->
-    <div id="app-settings">
-        <app-settings layout-active="default" :layout-location="{
-      'default': 'ui-forms.html',
-      'fixed': 'fixed-ui-forms.html',
-      'fluid': 'fluid-ui-forms.html',
-      'mini': 'mini-ui-forms.html'
-    }"></app-settings>
-    </div>
 
     <!-- jQuery -->
     <script src="assets/vendor/jquery.min.js"></script>

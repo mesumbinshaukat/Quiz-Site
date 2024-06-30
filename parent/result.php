@@ -136,13 +136,13 @@ if (isset($_COOKIE['email'])) {
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-133433427-1');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-133433427-1');
     </script>
 </head>
 
@@ -178,17 +178,17 @@ if (isset($_COOKIE['email'])) {
 
                                 <h3>Answers</h3>
                                 <?php foreach ($quiz_data as $index => $question) : ?>
-                                    <div>
-                                        <p><?php echo $question['question']; ?></p>
-                                        <?php $user_answer = isset($user_answers[$index]) ? $user_answers[$index] : 'No Answer'; ?>
-                                        <?php $correct_answer = $question['correct_answer']; ?>
-                                        <?php if ($user_answer === $correct_answer) : ?>
-                                            <p style="color: green;">Your answer: <?php echo $user_answer; ?> (Correct)</p>
-                                        <?php else : ?>
-                                            <p style="color: red;">Your answer: <?php echo $user_answer; ?> (Incorrect)</p>
-                                            <p style="color: green;">Correct answer: <?php echo $correct_answer; ?></p>
-                                        <?php endif; ?>
-                                    </div>
+                                <div>
+                                    <p><?php echo $question['question']; ?></p>
+                                    <?php $user_answer = isset($user_answers[$index]) ? $user_answers[$index] : 'No Answer'; ?>
+                                    <?php $correct_answer = $question['correct_answer']; ?>
+                                    <?php if ($user_answer === $correct_answer) : ?>
+                                    <p style="color: green;">Your answer: <?php echo $user_answer; ?> (Correct)</p>
+                                    <?php else : ?>
+                                    <p style="color: red;">Your answer: <?php echo $user_answer; ?> (Incorrect)</p>
+                                    <p style="color: green;">Correct answer: <?php echo $correct_answer; ?></p>
+                                    <?php endif; ?>
+                                </div>
                                 <?php endforeach; ?>
 
                                 <a href="./quiz.php" class="btn btn-primary">Back to Quiz</a>
@@ -211,16 +211,6 @@ if (isset($_COOKIE['email'])) {
 
     </div>
     <!-- // END header-layout -->
-
-    <!-- App Settings FAB -->
-    <div id="app-settings">
-        <app-settings layout-active="default" :layout-location="{
-      'default': 'ui-forms.html',
-      'fixed': 'fixed-ui-forms.html',
-      'fluid': 'fluid-ui-forms.html',
-      'mini': 'mini-ui-forms.html'
-    }"></app-settings>
-    </div>
 
     <!-- jQuery -->
     <script src="assets/vendor/jquery.min.js"></script>

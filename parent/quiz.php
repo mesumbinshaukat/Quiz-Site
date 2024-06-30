@@ -61,13 +61,13 @@ $student_result = mysqli_query($conn, $student_query);
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-133433427-1');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-133433427-1');
     </script>
 </head>
 
@@ -96,14 +96,14 @@ $student_result = mysqli_query($conn, $student_query);
 
                     <div class="container-fluid page__container">
                         <?php if (isset($_SESSION["success"])) { ?>
-                            <div class="alert alert-success" role="alert">
-                                <?php echo $_SESSION["success"]; ?>
-                            </div>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $_SESSION["success"]; ?>
+                        </div>
                         <?php }
                         if (isset($_SESSION["error"])) { ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php echo $_SESSION["error"]; ?>
-                            </div>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $_SESSION["error"]; ?>
+                        </div>
                         <?php }
                         session_unset();
                         ?>
@@ -115,9 +115,9 @@ $student_result = mysqli_query($conn, $student_query);
                                     <select name="student" id="student" required>
                                         <option value="">Select a student</option>
                                         <?php while ($student = mysqli_fetch_assoc($student_result)) : ?>
-                                            <option value="<?php echo $student['id']; ?>">
-                                                <?php echo $student['name']; ?>
-                                            </option>
+                                        <option value="<?php echo $student['id']; ?>">
+                                            <?php echo $student['name']; ?>
+                                        </option>
                                         <?php endwhile; ?>
                                     </select>
                                     <input type="hidden" name="quiz_id" id="quiz_id">
@@ -147,16 +147,6 @@ $student_result = mysqli_query($conn, $student_query);
     </div>
     <!-- // END header-layout -->
 
-    <!-- App Settings FAB -->
-    <div id="app-settings">
-        <app-settings layout-active="default" :layout-location="{
-      'default': 'ui-forms.html',
-      'fixed': 'fixed-ui-forms.html',
-      'fluid': 'fluid-ui-forms.html',
-      'mini': 'mini-ui-forms.html'
-    }"></app-settings>
-    </div>
-
     <!-- jQuery -->
     <script src="assets/vendor/jquery.min.js"></script>
 
@@ -184,33 +174,33 @@ $student_result = mysqli_query($conn, $student_query);
     <script src="assets/js/app-settings.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $('#student').change(function() {
-                var studentId = $(this).val();
-                if (studentId) {
-                    $.ajax({
-                        url: 'fetch_quizzes.php',
-                        type: 'POST',
-                        data: {
-                            student_id: studentId
-                        },
-                        success: function(response) {
-                            $('#quizList').html(response);
-                        },
-                        error: function() {
-                            alert('Error fetching quizzes.');
-                        }
-                    });
-                } else {
-                    $('#quizList').html('<p>Please select a student to view available quizzes.</p>');
-                }
-            });
+    $(document).ready(function() {
+        $('#student').change(function() {
+            var studentId = $(this).val();
+            if (studentId) {
+                $.ajax({
+                    url: 'fetch_quizzes.php',
+                    type: 'POST',
+                    data: {
+                        student_id: studentId
+                    },
+                    success: function(response) {
+                        $('#quizList').html(response);
+                    },
+                    error: function() {
+                        alert('Error fetching quizzes.');
+                    }
+                });
+            } else {
+                $('#quizList').html('<p>Please select a student to view available quizzes.</p>');
+            }
         });
+    });
 
-        function startQuiz(quizId) {
-            document.getElementById('quiz_id').value = quizId;
-            document.getElementById('quizForm').submit();
-        }
+    function startQuiz(quizId) {
+        document.getElementById('quiz_id').value = quizId;
+        document.getElementById('quizForm').submit();
+    }
     </script>
 
 </body>
