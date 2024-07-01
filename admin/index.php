@@ -153,7 +153,7 @@ $result_result = mysqli_query($conn, $result_query);
                         </div>
                         <div class="card card-form">
                             <table class="table">
-                                <h3>Parents</h3>
+                                <h3>Result</h3>
                                 <thead>
                                     <tr></tr>
                                     <th scope="col">#</th>
