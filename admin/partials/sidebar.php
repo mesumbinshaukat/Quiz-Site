@@ -50,6 +50,12 @@
                       </a>
                   </li>
                   <li class="sidebar-menu-item">
+                      <a class="sidebar-menu-button" href="custom-contact.php">
+                          <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">call</i>
+                          <span class="sidebar-menu-text">Customize Contact</span>
+                      </a>
+                  </li>
+                  <li class="sidebar-menu-item">
                       <a class="sidebar-menu-button" href="change-logo.php">
                           <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">image
                           </i>

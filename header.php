@@ -9,7 +9,7 @@
                 <ul id="main-nav" class="nav navbar-nav clearfix">
 
                     <li><a href="index.php" target="_parent">Home</a></li>
-                    <li><a href="about.php" target="_parent">About</a></li>
+                    <!-- <li><a href="about.php" target="_parent">About</a></li> -->
                     <li><a href="contact.php" target="_parent">Contact Us</a></li>
                     <li><a href="./parent/login.php" target="_parent">Log In</a></li>
                     <li><a href="./parent/signup.php" target="_parent">Sign In</a></li>
@@ -38,7 +38,7 @@
 
 
                             <li><a href="index.php" target="_parent">Home</a></li>
-                            <li><a href="about.php" target="_parent">About</a></li>
+                            <!-- <li><a href="about.php" target="_parent">About</a></li> -->
                             <li><a href="contact.php" target="_parent">Contact</a></li>
                             <li><a href="./parent/login.php" target="_parent">Log In</a></li>
                             <li><a href="./parent/signup.php" target="_parent">Sign In</a></li>
