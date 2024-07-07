@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include("./admin/connection/connection.php");
 
@@ -9,17 +10,37 @@ $logo = mysqli_fetch_assoc($logo);
 $fetch_contact = "SELECT * FROM `db_contact` WHERE `id` = 1";
 $contact = mysqli_query($conn, $fetch_contact);
 $contact = mysqli_fetch_assoc($contact);
+
+if (isset($_POST["submit"])) {
+    $name = mysqli_real_escape_string($conn, $_POST["name"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $subject = mysqli_real_escape_string($conn, $_POST["subject"]);
+    $phone = mysqli_real_escape_string($conn, $_POST["phone"]);
+    $message = mysqli_real_escape_string($conn, $_POST["message"]);
+    $sql = "INSERT INTO `db_contact_msg`(`name`, `email`, `subject`, `contact_number`, `message`) VALUES ('$name', '$email', '$subject', '$phone', '$message')";
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        $_SESSION['success'] = "Message Sent Successfully";
+        header("Location: contact.php");
+        exit();
+    } else {
+        $_SESSION['error'] = "Something went wrong.";
+        echo "<script>console.log('Message Not Sent. " . mysqli_error($conn) . "')</script>";
+        header("Location: contact.php");
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Haptic - Contact</title>
+    <title>Contact</title>
     <meta name="description" content="Haptic - Web And Agency HTML Template">
     <meta name="keywords" content="agency, app, business, company, corporate, designer, freelance, fullpage, modern, office, personal, portfolio, professional, web, web agency">
     <meta name="author" content="Themexriver">
-    <link rel="shortcut icon" href="assets/img/logo/f-icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./logo/<?php echo $logo['logo']; ?>" type="image/x-icon">
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -31,6 +52,9 @@ $contact = mysqli_fetch_assoc($contact);
     <link rel="stylesheet" href="assets/css/swiper.min.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
 <body class="home-1">
@@ -120,51 +144,70 @@ $contact = mysqli_fetch_assoc($contact);
 	============================================= -->
 
     <br><br><br><br>
+
+    <section id="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14475.479940924219!2d67.07226698663793!3d24.902416080639007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f30a80523ff%3A0xf18a3ecfe7cffbdd!2sNational%20Stadium%20Karachi!5e0!3m2!1sen!2s!4v1719946789874!5m2!1sen!2s" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
     <!-- Start of contact info section
 	============================================= -->
     <section id="bi-contact-info" class="bi-contact-info-section inner-page-padding">
         <div class="container">
             <div class="bi-contact-info-content">
-                <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="bi-contact-info-item position-relative">
-                            <span class="info-bg position-absolute" data-background="assets/img/bg/ci-bg1.jpg"></span>
-                            <div class="inner-icon d-flex justify-content-center align-items-center">
-                                <img src="assets/img/icon/ci2.png" alt="">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 col-md-6">
+                                <div class="bi-contact-info-item position-relative">
+
+                                    <h5>Email Address</h5>
+                                    <p class="mb-0"><?= $contact['email_one'] ?></p>
+                                    <p class="mb-0"><?= $contact['email_two'] ?></p>
+                                </div>
                             </div>
-                            <div class="inner-text headline pera-content">
-                                <h3>Email Address</h3>
-                                <a href="#"><?= $contact['email_one'] ?></a>
-                                <a href="#"><?= $contact['email_two'] ?></a>
+                            <div class="col-lg-12 col-md-6">
+                                <div class="bi-contact-info-item position-relative">
+
+                                    <h5>Phone Number</h5>
+                                    <p class="mb-0"><?= $contact['contact_number_one'] ?></p>
+                                    <p class="mb-0"><?= $contact['contact_number_two'] ?></p>
+
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="bi-contact-info-item position-relative">
-                            <span class="info-bg position-absolute" data-background="assets/img/bg/ci-bg1.jpg"></span>
-                            <div class="inner-icon d-flex justify-content-center align-items-center">
-                                <img src="assets/img/icon/ci1.png" alt="">
-                            </div>
-                            <div class="inner-text headline pera-content">
-                                <h3>Phone Number</h3>
-                                <a href="#"><?= $contact['contact_number_one'] ?></a>
-                                <a href="#"><?= $contact['contact_number_two'] ?></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="bi-contact-info-item position-relative">
-                            <span class="info-bg position-absolute" data-background="assets/img/bg/ci-bg1.jpg"></span>
-                            <div class="inner-icon d-flex justify-content-center align-items-center">
-                                <img src="assets/img/icon/ci3.png" alt="">
-                            </div>
-                            <div class="inner-text headline pera-content">
-                                <h3>Location / Address</h3>
-                                <a href="#"><?= $contact['address'] ?></a>
+                            <div class="col-lg-12 col-md-6">
+                                <div class="bi-contact-info-item position-relative">
+
+                                    <h3>Address</h3>
+                                    <p href="#"><?= $contact['address'] ?></p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <form class="mt-lg-5" method="post">
+                            <div class="form-group mb-3">
+                                <input type="text" name="name" class="form-control m-2" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="email" name="email" class="form-control m-2" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" name="subject" class="form-control m-2" placeholder="Subject">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="tel" name="phone" class="form-control m-2" placeholder="Your Phone Number">
+                            </div>
+                            <div class="form-group mb-3">
+                                <textarea class="form-control m-2" name="message" placeholder="Message"></textarea>
+                            </div>
+                            <button type="submit" name="submit" class="btn btn-primary m-2">Submit</button>
+                        </form>
+                    </div>
+
+
                 </div>
+
             </div>
         </div>
     </section>
@@ -211,6 +254,23 @@ $contact = mysqli_fetch_assoc($contact);
     <script src="assets/js/tilt.jquery.min.js"></script>
     <script src="assets/js/matter.min.js"></script>
     <script src="assets/js/script.js"></script>
+
+    <?php
+
+    if (isset($_SESSION["success"])) {
+        echo "<script>
+        toastr.success('" . $_SESSION["success"] . "')
+        </script>";
+    }
+
+    if (isset($_SESSION["error"])) {
+        echo "<script>
+        toastr.error('" . $_SESSION["error"] . "')
+        </script>";
+    }
+
+    session_unset();
+    ?>
 </body>
 
 </html>

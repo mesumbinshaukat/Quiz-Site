@@ -9,19 +9,13 @@ if (!isset($_COOKIE["login"]) && !isset($_COOKIE["name"])) {
     exit();
 }
 
-// Fetch quizzes from database
+// Fetch quizzes from the database
 $quizzes_query = "SELECT * FROM `db_quiz`";
 $quizzes_result = mysqli_query($conn, $quizzes_query);
 
-// Check if there are no quizzes
-if (!$quizzes_result || mysqli_num_rows($quizzes_result) == 0) {
-    $quizzes = [];
-} else {
-    $quizzes = mysqli_fetch_all($quizzes_result, MYSQLI_ASSOC);
-}
+$quizzes = $quizzes_result ? mysqli_fetch_all($quizzes_result, MYSQLI_ASSOC) : [];
 
 $parent_email = $_COOKIE['email'];
-
 $parent_query = "SELECT `id` FROM `db_parents` WHERE `email` = '$parent_email'";
 $parent_result = mysqli_query($conn, $parent_query);
 $parent_row = mysqli_fetch_assoc($parent_result);
@@ -29,8 +23,6 @@ $parent_id = $parent_row['id'];
 
 $student_query = "SELECT * FROM `db_students` WHERE `parent_id` = $parent_id";
 $student_result = mysqli_query($conn, $student_query);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -63,13 +55,13 @@ $student_result = mysqli_query($conn, $student_query);
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-133433427-1');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-133433427-1');
     </script>
 </head>
 
@@ -98,14 +90,14 @@ $student_result = mysqli_query($conn, $student_query);
 
                     <div class="container-fluid page__container">
                         <?php if (isset($_SESSION["success"])) { ?>
-                            <div class="alert alert-success" role="alert">
-                                <?php echo $_SESSION["success"]; ?>
-                            </div>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $_SESSION["success"]; ?>
+                        </div>
                         <?php }
                         if (isset($_SESSION["error"])) { ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php echo $_SESSION["error"]; ?>
-                            </div>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $_SESSION["error"]; ?>
+                        </div>
                         <?php }
                         session_unset();
                         ?>
@@ -117,10 +109,9 @@ $student_result = mysqli_query($conn, $student_query);
                                     <select name="student" id="student" required>
                                         <option value="">Select a student</option>
                                         <?php while ($student = mysqli_fetch_assoc($student_result)) : ?>
-                                            <?php ?>
-                                            <option value="<?php echo $student['id']; ?>">
-                                                <?php echo $student['name']; ?>
-                                            </option>
+                                        <option value="<?php echo $student['id']; ?>">
+                                            <?php echo $student['name']; ?>
+                                        </option>
                                         <?php endwhile; ?>
                                     </select>
                                     <input type="hidden" name="quiz_id" id="quiz_id">
@@ -130,6 +121,13 @@ $student_result = mysqli_query($conn, $student_query);
                                     <p>Please select a student to view available quizzes.</p>
                                 </div>
 
+                            </div>
+                        </div>
+
+                        <!-- Payment Button -->
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <button id="payBtn" class="btn btn-primary" disabled>Pay and Start Quiz</button>
                             </div>
                         </div>
 
@@ -177,33 +175,81 @@ $student_result = mysqli_query($conn, $student_query);
     <script src="assets/js/app-settings.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $('#student').change(function() {
-                var studentId = $(this).val();
-                if (studentId) {
-                    $.ajax({
-                        url: 'fetch_quizzes.php',
-                        type: 'POST',
-                        data: {
-                            student_id: studentId
-                        },
-                        success: function(response) {
-                            $('#quizList').html(response);
-                        },
-                        error: function() {
-                            alert('Error fetching quizzes.');
-                        }
-                    });
-                } else {
-                    $('#quizList').html('<p>Please select a student to view available quizzes.</p>');
-                }
-            });
+    function startQuiz(quizId) {
+        document.getElementById('quiz_id').value = quizId;
+        $('#payBtn').prop('disabled', false); // Enable the payment button when quiz is selected
+    }
+
+    $(document).ready(function() {
+        $('#student').change(function() {
+            var studentId = $(this).val();
+            if (studentId) {
+                $.ajax({
+                    url: 'fetch_quizzes.php',
+                    type: 'POST',
+                    data: {
+                        student_id: studentId
+                    },
+                    success: function(response) {
+                        $('#quizList').html(response);
+                        $('#payBtn').prop('disabled',
+                        true); // Disable payment button until a quiz is selected
+                    },
+                    error: function() {
+                        alert('Error fetching quizzes.');
+                    }
+                });
+            } else {
+                $('#quizList').html('<p>Please select a student to view available quizzes.</p>');
+                $('#payBtn').prop('disabled', true); // Disable the payment button
+            }
         });
 
-        function startQuiz(quizId) {
-            document.getElementById('quiz_id').value = quizId;
-            document.getElementById('quizForm').submit();
-        }
+        $('#quizList').on('click', '.start-quiz-btn', function() {
+            var quizId = $(this).data('quiz-id');
+            $('#quiz_id').val(quizId);
+            $('#payBtn').prop('disabled', false); // Enable the payment button when quiz is selected
+        });
+
+        $('#payBtn').click(function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var quizId = $('#quiz_id').val();
+            var studentId = $('#student').val();
+
+            if (quizId && studentId) {
+                // Store quiz_id and student_id in the session
+                $.ajax({
+                    url: 'store_quiz_session.php',
+                    type: 'POST',
+                    data: {
+                        quiz_id: quizId,
+                        student_id: studentId
+                    },
+                    success: function(response) {
+                        try {
+                            var data = JSON.parse(response);
+                            if (data.success) {
+                                window.location.href = 'initiate_payment.php';
+                            } else {
+                                alert(data.error || 'Error storing session data.');
+                            }
+                        } catch (e) {
+                            console.error('Failed to parse JSON response:', response);
+                            alert('Invalid JSON response received.');
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('AJAX Error:', textStatus, errorThrown);
+                        alert('Error storing session data: ' + textStatus);
+                    }
+                });
+            } else {
+                alert('Please select a student and quiz.');
+            }
+        });
+
+    });
     </script>
 
 </body>

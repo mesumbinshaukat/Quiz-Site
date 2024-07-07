@@ -38,8 +38,7 @@ $home_content = mysqli_fetch_assoc($home_content);
     <div class="cursor"></div>
     <!-- Start of Header section
 	============================================= -->
-    <?php include("./header.php");
-    ?>
+    <?php include("./header.php"); ?>
 
     <div class="content">
         <!-- Sidebar sidebar Item -->
@@ -125,7 +124,7 @@ $home_content = mysqli_fetch_assoc($home_content);
                         <div class="about-exp hap-headline position-absolute">
                             <h3><strong class="counter"><?= $home_content['experience']; ?></strong>+</h3>
                             <span>Years
-                                Experinece</span>
+                                Experience</span>
                         </div>
                     </div>
                     <div class="hap-about-text-wrapper d-flex justify-content-end">
@@ -140,12 +139,10 @@ $home_content = mysqli_fetch_assoc($home_content);
                             </div>
                             <div
                                 class="hap-about-feature-area d-flex justify-content-between flex-wrap position-relative">
-
-
                             </div>
                             <div class="hap-btn text-uppercase wow flipInX" data-wow-delay="500ms"
                                 data-wow-duration="1000ms">
-                                <a href="about.php">about Us <i class="far fa-arrow-right"></i></a>
+                                <a href="contact.php">Contact Us <i class="far fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -155,7 +152,66 @@ $home_content = mysqli_fetch_assoc($home_content);
         <!-- End of About section
 	============================================= -->
 
+        <!-- Add this content between your existing sections -->
 
+        <!-- Start of Additional Content section
+============================================= -->
+        <section id="hap-service" class="hap-service-section position-relative">
+            <div class="container">
+                <div class="hap-section-title hap-headline dark-bg-title text-center pera-content">
+                    <div class="sub-title text-uppercase wow fadeInRight" data-wow-delay="200ms"
+                        data-wow-duration="1000ms">
+                        Standard Quiz Site
+                    </div>
+                    <h2 class="text-uppercase headline-title text-dark">Parents are
+                        satisfied by our services.
+                    </h2>
+                </div>
+
+                <div class="hap-service-scroll-text-area hap-headline">
+                    <div class="hap-section-title hap-headline dark-bg-title text-center pera-content">
+                        <div class="sub-title text-uppercase">
+                            More than <?= $home_content['experience']; ?> experience
+                        </div>
+                    </div>
+                    <h2 class="text-uppercase">
+                        Explore our interactive
+                    </h2>
+                    <h2 class="text-uppercase">
+                        quizzes designed<span class="strock_txt"> to </span>
+
+                    </h2>
+                    <h2 class="text-uppercase">
+                        challenge and
+                        educate.
+                    </h2>
+                    <h2 class="text-uppercase">
+                        <span class="strock_txt">Whether you're a
+                        </span>
+
+                    </h2>
+                    <h2 class="text-uppercase">
+                        student looking to
+
+                    </h2>
+                    <h2 class="text-uppercase">
+                        <span class="strock_txt">test your knowledge, </span>
+
+                    </h2>
+                    <h2 class="text-uppercase">
+                        our
+                        platform is
+
+                    </h2>
+                    <h2 class="text-uppercase">
+                        <span class="strock_txt"> tailored for you.</span>
+
+                    </h2>
+                </div>
+            </div>
+        </section>
+        <!-- End of Additional Content section
+============================================= -->
 
         <!-- Start of Footer section
 	============================================= -->
@@ -170,9 +226,6 @@ $home_content = mysqli_fetch_assoc($home_content);
 	============================================= -->
     </div>
     <?php include("./scripts.php") ?>
-    <!-- Save button -->
-    <!-- Save button -->
-
 </body>
 
 </html>

@@ -3,20 +3,21 @@ session_start();
 
 include("./connection/connection.php");
 
+// Check if user is logged in
 if (!isset($_COOKIE["login"]) && !isset($_COOKIE["name"])) {
     header("Location: login.php");
     exit();
 }
 
-// Check if quiz_id is provided via GET parameter
-if (!isset($_POST['quiz_id'])) {
-    $_SESSION['error'] = "Quiz ID not provided.";
+// Retrieve quiz_id and student_id from the session
+$quiz_id = isset($_SESSION['quiz_id']) ? $_SESSION['quiz_id'] : null;
+$student_id = isset($_SESSION['student_id']) ? $_SESSION['student_id'] : null;
+
+if (!$quiz_id || !$student_id) {
+    $_SESSION['error'] = "Quiz ID or Student ID not provided.";
     header("Location: ./quiz.php");
     exit();
 }
-
-$quiz_id = $_POST['quiz_id'];
-$_SESSION['student_id'] = $_POST["student"];
 
 // Fetch quiz details from db_quiz
 $quiz_query = "SELECT * FROM `db_quiz` WHERE id = $quiz_id";
